@@ -184,7 +184,7 @@ $('lbg').style.backgroundImage = `url("${IMG}")`;
 // Positions measured on the image (pixels of the 1672 x 941 picture)
 const WAI = { x: 921, y: 588 };
 const CITIES = [
-  { n: 'Mumbai',        x: 467, y: 242, km: '234 km',  t: '4 – 5 hrs', bend: -0.12, chip: 'left'  },
+  { n: 'Mumbai',        x: 467, y: 242, km: '234 km',  t: '4.5 hrs', bend: -0.12, chip: 'left'  },
   { n: 'Pune',          x: 855, y: 387, km: '95 km',   t: '2.5 hrs',   bend: -0.14, chip: 'left'  },
   { n: 'Satara',        x: 953, y: 688, km: '46.1 km', t: '~1 hr*',    bend: -0.30, chip: 'left'  },
   { n: 'Mahabaleshwar', x: 764, y: 605, km: '41.5 km', t: '1.5 hrs',   bend:  0.14, chip: 'right' }
