@@ -530,6 +530,207 @@
 
 <!-- 8b) Investment Options: arrow buttons -> Typeform -->
 
+<style>
+  .cv {
+    --bg: #faf9f5;
+    --ink: #1c1e18;
+    --olive: #6b7a3a;
+    --muted: #6e6f66;
+    --panel: #efeee6;
+    position: relative;
+    width: 100vw;
+    min-height: 760px;
+    margin-left: calc(50% - 50vw);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'DM Sans', system-ui, sans-serif;
+  }
+  .cv *, .cv *::before, .cv *::after { box-sizing: border-box; }
+  .cv-head { flex: 0 0 auto; text-align: center; padding: clamp(36px, 7vh, 84px) 24px 0; position: relative; z-index: 5; }
+  .cv-eyebrow { display: inline-block; margin-bottom: 16px; font-size: 12px; font-weight: 500; letter-spacing: .24em; text-transform: uppercase; color: var(--olive); }
+  .cv-title { margin: 0 auto; max-width: 20em; font-size: clamp(30px, 4.2vw, 64px); line-height: 1.1; font-weight: 300; letter-spacing: -.045em; }
+  .cv-title span { color: var(--olive); }
+  .cv-sub { margin: 16px auto 0; max-width: 38em; font-size: clamp(13px, 1.1vw, 16px); font-weight: 300; color: var(--muted); }
+  .cv-stage { flex: 1 1 auto; min-height: 0; position: relative; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+  .cv-card {
+    position: absolute; left: 50%; top: 50%; margin: 0;
+    border-radius: 22px; overflow: hidden;
+    background: var(--panel);
+    cursor: pointer;
+    transition: transform .8s cubic-bezier(.22,.8,.2,1), opacity .5s ease;
+    box-shadow: 0 30px 60px -24px rgba(40,42,28,.5);
+    will-change: transform;
+  }
+  .cv-card img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
+  .cv-veil { position: absolute; inset: 0; background: var(--bg); opacity: 0; pointer-events: none; transition: opacity .8s ease; }
+  .cv-ctrl { flex: 0 0 auto; position: relative; display: flex; justify-content: center; align-items: center; gap: 14px; height: 96px; }
+  .cv-btn {
+    width: 44px; height: 44px; border-radius: 50%;
+    border: 1px solid var(--ink); background: transparent; color: var(--ink);
+    display: grid; place-items: center; cursor: pointer; padding: 0;
+    transition: background .25s, color .25s, transform .25s;
+  }
+  .cv-btn:hover { background: var(--ink); color: var(--bg); transform: scale(1.06); }
+  .cv-btn svg { width: 18px; height: 18px; }
+  .cv-expand {
+    position: absolute; right: clamp(16px, 4vw, 64px); top: 50%; transform: translateY(-50%);
+    width: 52px; height: 52px; border: 0; background: var(--panel);
+  }
+  .cv-expand:hover { transform: translateY(-50%) scale(1.06); }
+  .cv-lb { position: fixed; inset: 0; z-index: 99999; display: none; align-items: center; justify-content: center; background: rgba(22,24,17,.94); }
+  .cv-lb.is-open { display: flex; }
+  .cv-lb img { max-width: 88vw; max-height: 86vh; border-radius: 14px; box-shadow: 0 40px 80px -30px #000; }
+  .cv-lb .cv-btn { position: absolute; border-color: #fff; color: #fff; }
+  .cv-lb .cv-btn:hover { background: #fff; color: var(--ink); }
+  .cv-lb .cv-x { top: 24px; right: 24px; }
+  .cv-lb .cv-lp { left: 24px; top: 50%; margin-top: -22px; }
+  .cv-lb .cv-ln { right: 24px; top: 50%; margin-top: -22px; }
+  @media (max-width: 700px) {
+    .cv { min-height: 640px; }
+    .cv-expand { width: 44px; height: 44px; }
+  }
+</style>
+
+<section class="cv" id="shCover" aria-label="Seven Hills Wai gallery">
+  <div class="cv-head">
+    <span class="cv-eyebrow">Gallery</span>
+    <h2 class="cv-title">Where seven hills <span>meet your home</span></h2>
+    <p class="cv-sub">40 acres of NA villa plots in Wai — a glimpse of the land, the views and the life.</p>
+  </div>
+
+  <div class="cv-stage">
+    <figure class="cv-card"><img src="./Assets/7_Natural_Hills.png" alt="Seven Hills Wai 1" draggable="false"></figure>
+    <figure class="cv-card"><img src="./Assets/natural_Lake_.png" alt="Seven Hills Wai 2" draggable="false"></figure>
+    <figure class="cv-card"><img src="./Assets/Living_Geography.png" alt="Seven Hills Wai 3" draggable="false"></figure>
+    <figure class="cv-card"><img src="./Assets/Pandavgad_Fort.png" alt="Seven Hills Wai 4" draggable="false"></figure>
+    <figure class="cv-card"><img src="./Assets/Roof_top_cafe.png" alt="Seven Hills Wai 5" draggable="false"></figure>
+  </div>
+
+  <div class="cv-ctrl">
+    <button class="cv-btn cv-prev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+    <button class="cv-btn cv-next" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    <button class="cv-btn cv-expand" aria-label="View full screen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/></svg></button>
+  </div>
+
+  <div class="cv-lb" role="dialog" aria-modal="true" aria-label="Gallery full screen">
+    <img alt="">
+    <button class="cv-btn cv-x" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <button class="cv-btn cv-lp" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+    <button class="cv-btn cv-ln" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+  </div>
+</section>
+
+<script>
+(function () {
+  var root  = document.getElementById('shCover');
+  var stage = root.querySelector('.cv-stage');
+  var cards = [].slice.call(stage.querySelectorAll('.cv-card'));
+  var head  = root.querySelector('.cv-head');
+  var lb    = root.querySelector('.cv-lb');
+  var lbImg = lb.querySelector('img');
+  var N = cards.length;
+
+  var AUTOPLAY_MS = 4500;
+  var SCALE = [1, .72, .52];
+  var POS   = [0, .84, 1.44];
+  var VEIL  = [0, .3, .5];
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var cur = 0, W = 0, prev = cards.map(function () { return 0; });
+  var veils = cards.map(function (c) {
+    var v = document.createElement('div'); v.className = 'cv-veil'; c.appendChild(v); return v;
+  });
+
+  function offset(i) {
+    var d = ((i - cur) % N + N) % N; if (d > N / 2) d -= N; return d;
+  }
+  function render(instant) {
+    cards.forEach(function (c, i) {
+      var d = offset(i), a = Math.abs(d), s = d < 0 ? -1 : 1;
+      var wrap = !instant && Math.abs(d - prev[i]) > 2;
+      c.style.transition = (wrap || instant) ? 'none' : '';
+      c.style.transform = 'translateX(' + (s * POS[a] * W) + 'px) scale(' + SCALE[a] + ')';
+      c.style.zIndex = 10 - a;
+      veils[i].style.opacity = VEIL[a];
+      if (wrap) { c.style.opacity = 0; void c.offsetWidth; c.style.transition = ''; }
+      c.style.opacity = 1;
+      prev[i] = d;
+    });
+  }
+  function layout() {
+    var sw = stage.clientWidth, sh = stage.clientHeight;
+    W = Math.min(sw * (sw < 700 ? .62 : .34), sh * .88 / 1.2);
+    var H = W * 1.2;
+    cards.forEach(function (c) {
+      c.style.width = W + 'px'; c.style.height = H + 'px';
+      c.style.marginLeft = (-W / 2) + 'px'; c.style.marginTop = (-H / 2) + 'px';
+    });
+    render(true);
+  }
+  function go(n) { cur = ((n % N) + N) % N; render(); if (lb.classList.contains('is-open')) lbShow(); restart(); }
+  function next() { go(cur + 1); }
+  function prevSlide() { go(cur - 1); }
+
+  root.querySelector('.cv-next').addEventListener('click', next);
+  root.querySelector('.cv-prev').addEventListener('click', prevSlide);
+  var sx = 0, moved = false, down = false;
+  stage.addEventListener('pointerdown', function (e) { down = true; moved = false; sx = e.clientX; paused = true; });
+  stage.addEventListener('pointerup', function (e) {
+    if (!down) return; down = false; paused = false;
+    var dx = e.clientX - sx;
+    if (Math.abs(dx) > 50) { moved = true; dx < 0 ? next() : prevSlide(); }
+  });
+  stage.addEventListener('pointercancel', function () { down = false; paused = false; });
+  cards.forEach(function (c, i) {
+    c.addEventListener('click', function () {
+      if (moved) { moved = false; return; }
+      if (i === cur) openLb(); else go(i);
+    });
+  });
+
+  function lbShow() { lbImg.src = cards[cur].querySelector('img').src; }
+  function openLb() { lbShow(); lb.classList.add('is-open'); paused = true; }
+  function closeLb() { lb.classList.remove('is-open'); paused = false; }
+  root.querySelector('.cv-expand').addEventListener('click', openLb);
+  lb.querySelector('.cv-x').addEventListener('click', closeLb);
+  lb.querySelector('.cv-ln').addEventListener('click', next);
+  lb.querySelector('.cv-lp').addEventListener('click', prevSlide);
+  lb.addEventListener('click', function (e) { if (e.target === lb) closeLb(); });
+  document.addEventListener('keydown', function (e) {
+    var open = lb.classList.contains('is-open');
+    if (e.key === 'Escape' && open) closeLb();
+    if (e.key === 'ArrowRight' && (open || visible)) next();
+    if (e.key === 'ArrowLeft'  && (open || visible)) prevSlide();
+  });
+
+  var paused = false, visible = true, timer = null;
+  function restart() {
+    clearInterval(timer);
+    if (!AUTOPLAY_MS || reduce) return;
+    timer = setInterval(function () { if (!paused && visible && !document.hidden) next(); }, AUTOPLAY_MS);
+  }
+  stage.addEventListener('mouseenter', function () { paused = true; });
+  stage.addEventListener('mouseleave', function () { if (!down && !lb.classList.contains('is-open')) paused = false; });
+  new IntersectionObserver(function (en) { visible = en[0].isIntersecting; }, { threshold: .35 }).observe(root);
+
+  function onScroll() {
+    var r = root.getBoundingClientRect(), vh = window.innerHeight;
+    if (r.bottom < 0 || r.top > vh) return;
+    var p = -r.top;
+    head.style.transform = 'translate3d(0,' + (p * .3) + 'px,0)';
+    head.style.opacity = Math.max(0, 1 - Math.abs(p) / (vh * .9));
+    stage.style.transform = 'translate3d(0,' + (-p * .08) + 'px,0)';
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  window.addEventListener('resize', layout);
+  layout(); restart(); onScroll();
+})();
+</script>
+
 
 <!-- =====================================================================
      7b) CONTACT FORM
