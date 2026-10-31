@@ -1,1002 +1,1627 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Seven Hills Wai</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
-<!-- GSAP & ScrollTrigger (loaded once, used by the video intro, Amenities and Legal sections) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<style>
-  .shw {
-    --bg: #faf8f4;
-    --ink: #1a1a18;
-    --olive: #6b7a2e;
-    --muted: #6b6b66;
-    --line: #dcdad2;
-    position: relative;
-    left: 50%;
-    width: 100vw;
-    margin-left: -50vw;
-    padding: clamp(28px, 4vw, 48px) clamp(16px, 4vw, 56px) clamp(28px, 4vw, 56px);
-    box-sizing: border-box;
-    background: var(--bg);
-    color: var(--ink);
-    font-family: 'DM Sans', sans-serif;
-  }
-  .shw *, .shw *::before, .shw *::after { box-sizing: border-box; }
-  .shw-inner { max-width: 1330px; margin: 0 auto; }
-  .shw-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 32px;
-    margin: 0 0 clamp(16px, 2.5vw, 28px);
-  }
-  .shw-title { display: flex; flex-direction: column; align-items: flex-start; }
-  .shw-tag {
-    display: inline-block;
-    margin: 0 0 16px;
-    padding: 9px 14px;
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    background: #fff;
-    font-size: 13px;
-    line-height: 1;
-  }
-  .shw h2 {
-    margin: 0 !important;
-    padding: 0 !important;
-    color: var(--ink);
-    font-size: clamp(52px, 7vw, 88px);
-    font-weight: 300;
-    line-height: .88;
-    letter-spacing: -.05em;
-  }
-  .shw h2 span { display: block; margin: 0; padding: 0; color: var(--olive); }
-  .shw-meta { width: 340px; max-width: 100%; }
-  .shw-meta p {
-    margin: 0 0 clamp(18px, 3vw, 36px);
-    color: var(--muted);
-    font-size: 16px;
-    line-height: 1.5;
-  }
-  .shw-label {
-    margin: 0 0 8px;
-    color: var(--muted);
-    font-size: 12px;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-  }
-  .shw-count { display: flex; align-items: flex-end; gap: 36px; }
-  .shw-num {
-    margin: 0;
-    font-size: clamp(44px, 5vw, 56px);
-    font-weight: 300;
-    line-height: 1;
-    letter-spacing: -.05em;
-  }
-  .shw-unit { padding-bottom: 6px; color: var(--olive); font-size: 17px; }
-  .shw-bar { position: relative; width: 144px; height: 2px; margin-top: 12px; background: var(--line); }
-  .shw-bar i { position: absolute; top: 0; left: 0; width: 35%; height: 100%; background: var(--olive); }
-  .shw-card { overflow: hidden; border: 1px solid var(--line); border-radius: 28px; background: #eceae2; line-height: 0; }
-  .shw-card img { display: block; width: 100%; max-width: 100%; height: auto; margin: 0; }
-  .shw-img-desktop { display: block !important; }
-  .shw-img-mobile { display: none !important; }
-  @media (max-width: 768px) {
-    .shw { padding: 28px 16px 32px; }
-    .shw-head { flex-direction: column; align-items: flex-start; gap: 20px; margin-bottom: 20px; }
-    .shw h2 { font-size: clamp(56px, 18vw, 80px); }
-    .shw-meta { width: 100%; }
-    .shw-meta p { margin-bottom: 22px; font-size: 15px; }
-    .shw-count { gap: 24px; }
-    .shw-card { border-radius: 20px; }
-    .shw-img-desktop { display: none !important; }
-    .shw-img-mobile { display: block !important; }
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Seven Hills Wai</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <!-- GSAP & ScrollTrigger (loaded once, used by the video intro, Amenities and Legal sections) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <style>
+    .shw {
+      --bg: #faf8f4;
+      --ink: #1a1a18;
+      --olive: #6b7a2e;
+      --muted: #6b6b66;
+      --line: #dcdad2;
+      position: relative;
+      left: 50%;
+      width: 100vw;
+      margin-left: -50vw;
+      padding: clamp(28px, 4vw, 48px) clamp(16px, 4vw, 56px) clamp(28px, 4vw, 56px);
+      box-sizing: border-box;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .shw *,
+    .shw *::before,
+    .shw *::after {
+      box-sizing: border-box;
+    }
+
+    .shw-inner {
+      max-width: 1330px;
+      margin: 0 auto;
+    }
+
+    .shw-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 32px;
+      margin: 0 0 clamp(16px, 2.5vw, 28px);
+    }
+
+    .shw-title {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .shw-tag {
+      display: inline-block;
+      margin: 0 0 16px;
+      padding: 9px 14px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #fff;
+      font-size: 13px;
+      line-height: 1;
+    }
+
+    .shw h2 {
+      margin: 0 !important;
+      padding: 0 !important;
+      color: var(--ink);
+      font-size: clamp(52px, 7vw, 88px);
+      font-weight: 300;
+      line-height: .88;
+      letter-spacing: -.05em;
+    }
+
+    .shw h2 span {
+      display: block;
+      margin: 0;
+      padding: 0;
+      color: var(--olive);
+    }
+
+    .shw-meta {
+      width: 340px;
+      max-width: 100%;
+    }
+
+    .shw-meta p {
+      margin: 0 0 clamp(18px, 3vw, 36px);
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    .shw-label {
+      margin: 0 0 8px;
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .shw-count {
+      display: flex;
+      align-items: flex-end;
+      gap: 36px;
+    }
+
+    .shw-num {
+      margin: 0;
+      font-size: clamp(44px, 5vw, 56px);
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -.05em;
+    }
+
+    .shw-unit {
+      padding-bottom: 6px;
+      color: var(--olive);
+      font-size: 17px;
+    }
+
+    .shw-bar {
+      position: relative;
+      width: 144px;
+      height: 2px;
+      margin-top: 12px;
+      background: var(--line);
+    }
+
+    .shw-bar i {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 35%;
+      height: 100%;
+      background: var(--olive);
+    }
+
+    .shw-card {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: #eceae2;
+      line-height: 0;
+    }
+
+    .shw-card img {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      margin: 0;
+    }
+
+    .shw-img-desktop {
+      display: block !important;
+    }
+
+    .shw-img-mobile {
+      display: none !important;
+    }
+
+    @media (max-width: 768px) {
+      .shw {
+        padding: 28px 16px 32px;
+      }
+
+      .shw-head {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+        margin-bottom: 20px;
+      }
+
+      .shw h2 {
+        font-size: clamp(56px, 18vw, 80px);
+      }
+
+      .shw-meta {
+        width: 100%;
+      }
+
+      .shw-meta p {
+        margin-bottom: 22px;
+        font-size: 15px;
+      }
+
+      .shw-count {
+        gap: 24px;
+      }
+
+      .shw-card {
+        border-radius: 20px;
+      }
+
+      .shw-img-desktop {
+        display: none !important;
+      }
+
+      .shw-img-mobile {
+        display: block !important;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- =====================================================================
+  <!-- =====================================================================
      0) SCROLL-SCRUBBED VIDEO INTRO
      ===================================================================== -->
-<div class="s0">
-  <div id="video-viewport" role="button" tabindex="0" aria-label="Tap to see the video">
-    <!-- HERO VIDEO: two links.
+  <div class="s0">
+    <div id="video-viewport" role="button" tabindex="0" aria-label="Tap to see the video">
+      <!-- HERO VIDEO: two links.
          data-src-web    = video for desktop / tablet-landscape (wider than 768px)
          data-src-mobile = video for phones (768px wide or less)
          data-poster-web / data-poster-mobile = image link shown before the video plays (web / phone).
          Paste a file path (e.g. "./Assets/mobile.mp4") or a full https:// URL in each.
          To change the breakpoint, edit data-breakpoint (px). -->
-    <video id="scrub-video"
-           data-src-web="./Assets/seven hills web leaves animation.mp4"
-           data-src-mobile="./Assets/Mobile_view_viedo.mp4"
-           data-poster-web=""
-           data-poster-mobile=""
-           data-breakpoint="768"
-           playsinline webkit-playsinline preload="auto">
-      Your browser does not support HTML5 video.
-    </video>
-    <script>
-    /* Picks the web or mobile video link. Runs before script.js so the right file loads first. */
-    (function () {
-      var v = document.getElementById('scrub-video');
-      if (!v) return;
-      var bp = parseInt(v.getAttribute('data-breakpoint'), 10) || 768;
-      var mq = window.matchMedia('(max-width: ' + bp + 'px)');
-      function pick() {
-        var web = v.getAttribute('data-src-web');
-        var mob = v.getAttribute('data-src-mobile') || web;
-        return (mq.matches ? mob : web) || v.getAttribute('src');
-      }
-      function setPoster() {
-        var p = (mq.matches ? v.getAttribute('data-poster-mobile') : v.getAttribute('data-poster-web'))
-                || v.getAttribute('data-poster-web') || v.getAttribute('data-poster-mobile');
-        if (p) v.setAttribute('poster', p); else v.removeAttribute('poster');
-      }
-      function apply() {
-        setPoster();
-        var next = pick();
-        if (!next || v.getAttribute('src') === next) return;
-        /* only swap while the video is idle, so playback is never interrupted */
-        if (v.currentTime > 0 && !v.paused && !v.ended) return;
-        v.setAttribute('src', next);
-        v.load();
-      }
-      setPoster();
-      var first = pick();
-      if (first) v.setAttribute('src', first);
-      if (mq.addEventListener) mq.addEventListener('change', apply);
-      else if (mq.addListener) mq.addListener(apply);
-    })();
-    </script>
-    <div id="hero-shade"></div>
+      <video id="scrub-video" data-src-web="./Assets/seven hills web leaves animation.mp4"
+        data-src-mobile="./Assets/Mobile_view_viedo.mp4" data-poster-web="" data-poster-mobile="" data-breakpoint="768"
+        playsinline webkit-playsinline preload="auto">
+        Your browser does not support HTML5 video.
+      </video>
+      <script>
+        /* Picks the web or mobile video link. Runs before script.js so the right file loads first. */
+        (function () {
+          var v = document.getElementById('scrub-video');
+          if (!v) return;
+          var bp = parseInt(v.getAttribute('data-breakpoint'), 10) || 768;
+          var mq = window.matchMedia('(max-width: ' + bp + 'px)');
+          function pick() {
+            var web = v.getAttribute('data-src-web');
+            var mob = v.getAttribute('data-src-mobile') || web;
+            return (mq.matches ? mob : web) || v.getAttribute('src');
+          }
+          function setPoster() {
+            var p = (mq.matches ? v.getAttribute('data-poster-mobile') : v.getAttribute('data-poster-web'))
+              || v.getAttribute('data-poster-web') || v.getAttribute('data-poster-mobile');
+            if (p) v.setAttribute('poster', p); else v.removeAttribute('poster');
+          }
+          function apply() {
+            setPoster();
+            var next = pick();
+            if (!next || v.getAttribute('src') === next) return;
+            /* only swap while the video is idle, so playback is never interrupted */
+            if (v.currentTime > 0 && !v.paused && !v.ended) return;
+            v.setAttribute('src', next);
+            v.load();
+          }
+          setPoster();
+          var first = pick();
+          if (first) v.setAttribute('src', first);
+          if (mq.addEventListener) mq.addEventListener('change', apply);
+          else if (mq.addListener) mq.addListener(apply);
+        })();
+      </script>
+      <div id="hero-shade"></div>
 
-    <!-- shown before play / while paused -->
-    <button id="hero-play" type="button" aria-label="Tap to see the video">
-      <span class="hp-text">tap to see</span>
-    </button>
-
-    <!-- shown only after the video has ended -->
-    <div id="hero-end">
-      <button class="he-scroll" id="hero-scroll" type="button">
-        <span class="he-label">Scroll to explore</span>
-        <span class="he-mouse" aria-hidden="true"></span>
+      <!-- shown before play / while paused -->
+      <button id="hero-play" type="button" aria-label="Tap to see the video">
+        <span class="hp-text">tap to see</span>
       </button>
-      <button class="he-replay" id="hero-replay" type="button">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>Replay
-      </button>
-    </div>
 
-    <!-- Optional preview helper: load your own video file (remove before going live) -->
-    <div id="upload-container">
-      <label for="custom-file-input">Load Video File</label>
-      <input type="file" id="custom-file-input" accept="video/mp4,video/webm,video/quicktime" style="display:none;" />
+      <!-- shown only after the video has ended -->
+      <div id="hero-end">
+        <button class="he-scroll" id="hero-scroll" type="button">
+          <span class="he-label">Scroll to explore</span>
+          <span class="he-mouse" aria-hidden="true"></span>
+        </button>
+        <button class="he-replay" id="hero-replay" type="button">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M3 12a9 9 0 1 0 3-6.7" />
+            <path d="M3 4v5h5" />
+          </svg>Replay
+        </button>
+      </div>
+
+      <!-- Optional preview helper: load your own video file (remove before going live) -->
+      <div id="upload-container">
+        <label for="custom-file-input">Load Video File</label>
+        <input type="file" id="custom-file-input" accept="video/mp4,video/webm,video/quicktime" style="display:none;" />
+      </div>
     </div>
   </div>
-</div>
 
-<!-- =====================================================================
+  <!-- =====================================================================
      1) PROJECT OVERVIEW
      ===================================================================== -->
-<div class="s1">
-  <main class="ov-screen">
-    <svg class="ov-hills" viewBox="0 0 1440 160" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0 110 C180 60 340 70 520 100 S860 140 1040 92 1300 40 1440 80 V160 H0Z" fill="#f4f5ee"/>
-      <path d="M0 140 C220 100 420 120 640 134 S1060 146 1240 110 1380 96 1440 108 V160 H0Z" fill="#eef0e4" opacity=".8"/>
-    </svg>
-    <div class="ov-wrap">
-      <div class="ov-eyebrow"><span>Project Overview</span></div>
-      <h2 class="ov-h1">A Well-Planned <em>Hill Community</em></h2>
-      <p class="ov-lead">Thoughtfully designed to give you a better lifestyle in the lap of nature.</p>
-      <section class="ov-grid" aria-label="Project highlights">
-        <a class="ov-card" href="#" style="--i:0" onclick="return false">
-          <div class="ov-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 3 8l9 5 9-5-9-5Z"/><path d="m3 12.5 9 5 9-5"/></svg></div>
-          <div class="ov-txt"><b>Step Plotting</b><span>Optimised for natural terrain</span></div>
-          <div class="ov-go"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 6h9M6.5 2l4 4-4 4"/></svg></div>
-        </a>
-        <a class="ov-card" href="#" style="--i:1" onclick="return false">
-          <div class="ov-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4.5 6v5.5c0 4.4 3.1 8.1 7.5 9.5 4.4-1.4 7.5-5.1 7.5-9.5V6L12 3Z"/><path d="m9 12 2.2 2.2L15.2 10"/></svg></div>
-          <div class="ov-txt"><b>Secured Campus</b><span>Safe and peaceful environment</span></div>
-          <div class="ov-go"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 6h9M6.5 2l4 4-4 4"/></svg></div>
-        </a>
-        <a class="ov-card" href="#" style="--i:2" onclick="return false">
-          <div class="ov-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="1.5"/><path d="M4 9.3h16M4 14.7h16M9.3 4v16M14.7 4v16"/></svg></div>
-          <div class="ov-txt"><b>Gated Community</b><span>Controlled access for complete privacy</span></div>
-          <div class="ov-go"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 6h9M6.5 2l4 4-4 4"/></svg></div>
-        </a>
-        <a class="ov-card" href="#" style="--i:3" onclick="return false">
-          <div class="ov-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 21V4.5A1.5 1.5 0 0 1 7.5 3h8A1.5 1.5 0 0 1 17 4.5V21"/><path d="M3.5 21h17"/><circle cx="13.6" cy="12.5" r=".8" fill="currentColor"/></svg></div>
-          <div class="ov-txt"><b>Single Entry / Single Exit</b><span>Enhanced security and convenience</span></div>
-          <div class="ov-go"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 6h9M6.5 2l4 4-4 4"/></svg></div>
-        </a>
-        <a class="ov-card" href="#" style="--i:4" onclick="return false">
-          <div class="ov-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c0-8 5-13.5 14-14 .5 9-4.5 14.5-12 14.5"/><path d="M5 19c3-4.5 6-7 9.5-9"/></svg></div>
-          <div class="ov-txt"><b>Vastu Planned</b><span>In harmony with positive energy</span></div>
-          <div class="ov-go"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 6h9M6.5 2l4 4-4 4"/></svg></div>
-        </a>
-        <a class="ov-card" href="#" style="--i:5" onclick="return false">
-          <div class="ov-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 3 8l9 5 9-5-9-5Z"/><path d="m3 12.5 9 5 9-5"/><path d="m3 17 9 5 9-5"/></svg></div>
-          <div class="ov-txt"><b>FSI – 1.5</b><span>Flexible construction possibilities</span></div>
-          <div class="ov-go"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 6h9M6.5 2l4 4-4 4"/></svg></div>
-        </a>
-        <a class="ov-card wide" href="#" style="--i:6" onclick="return false">
-          <div class="ov-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c0-8 5-13.5 14-14 .5 9-4.5 14.5-12 14.5"/><path d="M5 19c3-4.5 6-7 9.5-9"/></svg></div>
-          <div class="ov-txt"><b>Best AQI</b><span>Clean and fresh air environment</span></div>
-          <div class="ov-go"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 6h9M6.5 2l4 4-4 4"/></svg></div>
-        </a>
-      </section>
-    </div>
-  </main>
-</div>
+  <div class="s1">
+    <main class="ov-screen">
+      <svg class="ov-hills" viewBox="0 0 1440 160" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0 110 C180 60 340 70 520 100 S860 140 1040 92 1300 40 1440 80 V160 H0Z" fill="#f4f5ee" />
+        <path d="M0 140 C220 100 420 120 640 134 S1060 146 1240 110 1380 96 1440 108 V160 H0Z" fill="#eef0e4"
+          opacity=".8" />
+      </svg>
+      <div class="ov-wrap">
+        <div class="ov-eyebrow"><span>Project Overview</span></div>
+        <h2 class="ov-h1">A Well-Planned <em>Hill Community</em></h2>
+        <p class="ov-lead">Thoughtfully designed to give you a better lifestyle in the lap of nature.</p>
+        <section class="ov-grid" aria-label="Project highlights">
+          <a class="ov-card" href="#" style="--i:0" onclick="return false">
+            <div class="ov-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3 3 8l9 5 9-5-9-5Z" />
+                <path d="m3 12.5 9 5 9-5" />
+              </svg></div>
+            <div class="ov-txt"><b>Step Plotting</b><span>Optimised for natural terrain</span></div>
+            <div class="ov-go"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1.5 6h9M6.5 2l4 4-4 4" />
+              </svg></div>
+          </a>
+          <a class="ov-card" href="#" style="--i:1" onclick="return false">
+            <div class="ov-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3 4.5 6v5.5c0 4.4 3.1 8.1 7.5 9.5 4.4-1.4 7.5-5.1 7.5-9.5V6L12 3Z" />
+                <path d="m9 12 2.2 2.2L15.2 10" />
+              </svg></div>
+            <div class="ov-txt"><b>Secured Campus</b><span>Safe and peaceful environment</span></div>
+            <div class="ov-go"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1.5 6h9M6.5 2l4 4-4 4" />
+              </svg></div>
+          </a>
+          <a class="ov-card" href="#" style="--i:2" onclick="return false">
+            <div class="ov-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="4" y="4" width="16" height="16" rx="1.5" />
+                <path d="M4 9.3h16M4 14.7h16M9.3 4v16M14.7 4v16" />
+              </svg></div>
+            <div class="ov-txt"><b>Gated Community</b><span>Controlled access for complete privacy</span></div>
+            <div class="ov-go"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1.5 6h9M6.5 2l4 4-4 4" />
+              </svg></div>
+          </a>
+          <a class="ov-card" href="#" style="--i:3" onclick="return false">
+            <div class="ov-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 21V4.5A1.5 1.5 0 0 1 7.5 3h8A1.5 1.5 0 0 1 17 4.5V21" />
+                <path d="M3.5 21h17" />
+                <circle cx="13.6" cy="12.5" r=".8" fill="currentColor" />
+              </svg></div>
+            <div class="ov-txt"><b>Single Entry / Single Exit</b><span>Enhanced security and convenience</span></div>
+            <div class="ov-go"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1.5 6h9M6.5 2l4 4-4 4" />
+              </svg></div>
+          </a>
+          <a class="ov-card" href="#" style="--i:4" onclick="return false">
+            <div class="ov-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 19c0-8 5-13.5 14-14 .5 9-4.5 14.5-12 14.5" />
+                <path d="M5 19c3-4.5 6-7 9.5-9" />
+              </svg></div>
+            <div class="ov-txt"><b>Vastu Planned</b><span>In harmony with positive energy</span></div>
+            <div class="ov-go"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1.5 6h9M6.5 2l4 4-4 4" />
+              </svg></div>
+          </a>
+          <a class="ov-card" href="#" style="--i:5" onclick="return false">
+            <div class="ov-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3 3 8l9 5 9-5-9-5Z" />
+                <path d="m3 12.5 9 5 9-5" />
+                <path d="m3 17 9 5 9-5" />
+              </svg></div>
+            <div class="ov-txt"><b>FSI – 1.5</b><span>Flexible construction possibilities</span></div>
+            <div class="ov-go"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1.5 6h9M6.5 2l4 4-4 4" />
+              </svg></div>
+          </a>
+          <a class="ov-card wide" href="#" style="--i:6" onclick="return false">
+            <div class="ov-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 19c0-8 5-13.5 14-14 .5 9-4.5 14.5-12 14.5" />
+                <path d="M5 19c3-4.5 6-7 9.5-9" />
+              </svg></div>
+            <div class="ov-txt"><b>Best AQI</b><span>Clean and fresh air environment</span></div>
+            <div class="ov-go"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1.5 6h9M6.5 2l4 4-4 4" />
+              </svg></div>
+          </a>
+        </section>
+      </div>
+    </main>
+  </div>
 
-<!-- =====================================================================
+  <!-- =====================================================================
      2) NATURE ATTRACTIONS (scroll-driven carousel)
      ===================================================================== -->
-<div class="s2">
-<div class="scrollwrap" id="nWrap">
-  <section class="pin">
+  <div class="s2">
+    <div class="scrollwrap" id="nWrap">
+      <section class="pin">
 
-    <div class="top">
-      <div>
-        <span class="pill">Seven Hills Wai</span>
-        <h2>Nature<br><em>Attraction</em></h2>
-      </div>
-      <p class="desc">Surrounded by greenery and scenic natural surroundings, offering a refreshing and peaceful living environment.</p>
-    </div>
-
-    <div class="bottom">
-      <div class="info">
-        <div class="left-meta">
-          <div class="count">
-            <div class="cur" id="nCur"><div id="nCurInner">
-              <span>01</span><span>02</span><span>03</span><span>04</span>
-            </div></div>
-            <span class="tot">/04</span>
+        <div class="top">
+          <div>
+            <span class="pill">Seven Hills Wai</span>
+            <h2>Nature<br><em>Attraction</em></h2>
           </div>
-          <p class="cap" id="nCap"></p>
-          <div class="bar"><i id="nBar"></i></div>
+          <p class="desc">Surrounded by greenery and scenic natural surroundings, offering a refreshing and peaceful
+            living environment.</p>
         </div>
-        <div class="ctrl">
-          <button class="nbtn" id="nPrev" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
-          <button class="nbtn dark" id="nNext" aria-label="Next"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-          <span class="hint">Scroll</span>
-        </div>
-      </div>
 
-      <div class="viewport">
-        <div class="track" id="nTrack">
-          <article class="card c1"><div class="bg"><img src="./Assets/7_Natural_Hills.png" alt="7 Natural Hills" onerror="this.style.display='none'"></div><span class="tag">Landscape</span>
-            <div class="txt"><h3>7 Natural<br>Hills</h3><p>Seven hills wrap the community with open skies and cool breezes.</p></div></article>
-          <article class="card c2"><div class="bg"><img src="./Assets/natural_Lake_.png" alt="Lake" onerror="this.style.display='none'"></div><span class="tag">Waterfront</span>
-            <div class="txt"><h3>Lake</h3><p>A calm lake nearby for morning walks and quiet evenings.</p></div></article>
-          <article class="card c3"><div class="bg"><img src="./Assets/Living_Geography.png" alt="Living Geography" onerror="this.style.display='none'"></div><span class="tag">Terrain</span>
-            <div class="txt"><h3>Living<br>Geography</h3><p>Valleys and green terrain that feel alive in every season.</p></div></article>
-          <article class="card c4"><div class="bg"><img src="./Assets/Pandavgad_Fort.png" alt="Pandavgad Fort" onerror="this.style.display='none'"></div><span class="tag">Heritage</span>
-            <div class="txt"><h3>Pandavgarh<br>Fort</h3><p>A historic hill fort close by, with weekend trails.</p></div></article>
+        <div class="bottom">
+          <div class="info">
+            <div class="left-meta">
+              <div class="count">
+                <div class="cur" id="nCur">
+                  <div id="nCurInner">
+                    <span>01</span><span>02</span><span>03</span><span>04</span>
+                  </div>
+                </div>
+                <span class="tot">/04</span>
+              </div>
+              <p class="cap" id="nCap"></p>
+              <div class="bar"><i id="nBar"></i></div>
+            </div>
+            <div class="ctrl">
+              <button class="nbtn" id="nPrev" aria-label="Previous"><svg viewBox="0 0 24 24">
+                  <path d="M19 12H5M11 6l-6 6 6 6" />
+                </svg></button>
+              <button class="nbtn dark" id="nNext" aria-label="Next"><svg viewBox="0 0 24 24">
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg></button>
+              <span class="hint">Scroll</span>
+            </div>
+          </div>
+
+          <div class="viewport">
+            <div class="track" id="nTrack">
+              <article class="card c1">
+                <div class="bg"><img src="./Assets/7_Natural_Hills.png" alt="7 Natural Hills"
+                    onerror="this.style.display='none'"></div><span class="tag">Landscape</span>
+                <div class="txt">
+                  <h3>7 Natural<br>Hills</h3>
+                  <p>Seven hills wrap the community with open skies and cool breezes.</p>
+                </div>
+              </article>
+              <article class="card c2">
+                <div class="bg"><img src="./Assets/natural_Lake_.png" alt="Lake" onerror="this.style.display='none'">
+                </div><span class="tag">Waterfront</span>
+                <div class="txt">
+                  <h3>Lake</h3>
+                  <p>A calm lake nearby for morning walks and quiet evenings.</p>
+                </div>
+              </article>
+              <article class="card c3">
+                <div class="bg"><img src="./Assets/Living_Geography.png" alt="Living Geography"
+                    onerror="this.style.display='none'"></div><span class="tag">Terrain</span>
+                <div class="txt">
+                  <h3>Living<br>Geography</h3>
+                  <p>Valleys and green terrain that feel alive in every season.</p>
+                </div>
+              </article>
+              <article class="card c4">
+                <div class="bg"><img src="./Assets/Pandavgad_Fort.png" alt="Pandavgad Fort"
+                    onerror="this.style.display='none'"></div><span class="tag">Heritage</span>
+                <div class="txt">
+                  <h3>Pandavgarh<br>Fort</h3>
+                  <p>A historic hill fort close by, with weekend trails.</p>
+                </div>
+              </article>
+            </div>
+          </div>
         </div>
-      </div>
+
+      </section>
     </div>
+  </div>
 
-  </section>
-</div>
-</div>
+  <!-- =========================================================
+     Section 3 — Location (satellite map)
+     ========================================================= -->
+  <div class="s3">
+    <header class="lh" id="lh">
+      <div>
+        <span class="lh-chip">Seven Hills Wai</span>
+        <h2 class="lh-title">
+          <span class="ln"><span>Connected to</span></span>
+          <span class="ln"><span>What Matters</span></span>
+        </h2>
+      </div>
+      <p class="lh-desc">Nestled in the hills of Wai, Satara — a comfortable drive from Pune, Mahabaleshwar and Mumbai.
+      </p>
+    </header>
 
-<!-- =====================================================================
-     3) LOCATION (satellite map)
-     ===================================================================== -->
-<div class="s3">
-<div class="loc3-card">
-<section class="loc3" id="loc">
-<div id="lbg"></div>
+    <div class="loc3-card">
+      <section class="loc3" id="loc">
+        <div id="lbg"></div>
 
-<div id="stage">
-  <img id="mapimg" width="1672" height="941" alt="Satellite map of western Maharashtra with the route from Mumbai and Pune to Seven Hills, Wai" draggable="false">
-  <div id="vignette"></div>
-  <svg id="lines" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"></svg>
-  <div id="markers"></div>
-</div>
+        <div id="lstage">
+          <img id="mapimg" width="1672" height="941"
+            alt="Satellite map of western Maharashtra with the route from Mumbai and Pune to Seven Hills, Wai"
+            draggable="false">
+          <div id="vignette"></div>
+          <svg id="lines" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"></svg>
+          <div id="markers"></div>
+        </div>
 
+        <div id="linfo">
+          <h3>From Seven Hills, Wai</h3>
+          <div class="sub">Distance &amp; travel time by road</div>
+          <div class="head"><span>Destination</span><span>Distance</span><span>Time</span></div>
+          <div class="row" data-i="0"></div>
+          <div class="row" data-i="1"></div>
+          <div class="row" data-i="2"></div>
+          <div class="row" data-i="3"></div>
+          <div class="note">* Satara time is an estimate</div>
+        </div>
+      </section>
+    </div>
+  </div>
 
-<div id="linfo">
-  <h3>From Seven Hills, Wai</h3>
-  <div class="sub">Distance &amp; travel time by road</div>
-  <div class="head"><span>Destination</span><span>Distance</span><span>Time</span></div>
-  <div class="row" data-i="0"></div>
-  <div class="row" data-i="1"></div>
-  <div class="row" data-i="2"></div>
-  <div class="row" data-i="3"></div>
-  <div class="note">* Satara time is an estimate</div>
-</div>
-</section>
-</div>
-</div>
-
-<!-- =====================================================================
+  <!-- =====================================================================
      4) AMENITIES
      ===================================================================== -->
-<div class="s4">
-<section class="amen" id="amen">
-  <div class="bg" id="bg"></div>
+  <div class="s4">
+    <section class="amen" id="amen">
+      <div class="bg" id="bg"></div>
 
-  <div class="panel" id="panel">
+      <div class="panel" id="panel">
 
-    <div class="head">
-      <span class="chip">Seven Hills Wai</span>
-      <h2>
-        <span class="ln"><span>Amenities for</span></span>
-        <span class="ln"><span>Modern Living</span></span>
-      </h2>
-    </div>
-
-    <p class="descr">Thoughtfully designed amenities offering residents comfort, recreation, fitness, and a modern lifestyle.</p>
-
-    <div class="ctrl">
-      <div class="cn">
-        <div class="count" aria-live="polite">
-          <span class="cur"><span id="curNum">01</span></span><span class="tot" id="totNum">/04</span>
+        <div class="head">
+          <span class="chip">Seven Hills Wai</span>
+          <h2>
+            <span class="ln"><span>Amenities for</span></span>
+            <span class="ln"><span>Modern Living</span></span>
+          </h2>
         </div>
-        <p class="note" id="note"></p>
-      </div>
-      <div class="btns">
-        <button class="btn prev" id="prev" aria-label="Previous amenity"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
-        <button class="btn next" id="next" aria-label="Next amenity"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-      </div>
-    </div>
 
-    <div class="vp" id="vp">
-      <div class="slider" id="slider" tabindex="0" aria-label="Amenities slider">
-        <div class="track" id="track">
+        <p class="descr">Thoughtfully designed amenities offering residents comfort, recreation, fitness, and a modern
+          lifestyle.</p>
 
-          <article class="card" data-note="Evenings above the hills, with 360° views.">
-            <div class="img"><img src="./Assets/Roof_top_cafe.png" alt="360° Rooftop Resto Bar" onerror="this.style.display='none'"></div><span class="tag">Dining</span>
-            <div class="txt"><h3>360° Rooftop<br>Resto Bar</h3><p>Sunset dining and sky-high evenings above the hills.</p></div>
-          </article>
-
-          <article class="card" data-note="Fitness with a view of the valley.">
-            <div class="img"><img src="./Assets/Hill_view_GYM.png" alt="Hill-view Gym" onerror="this.style.display='none'"></div><span class="tag">Fitness</span>
-            <div class="txt"><h3>Hill-view<br>Gym</h3><p>Train with open valley views and modern equipment.</p></div>
-          </article>
-
-          <article class="card" data-note="Recreation in the calm of nature.">
-            <div class="img"><img src="./Assets/Horse_ridding_arena.png" alt="Horse Riding Arena" onerror="this.style.display='none'"></div><span class="tag">Recreation</span>
-            <div class="txt"><h3>Horse Riding<br>Arena</h3><p>A dedicated arena for riding in the calm of nature.</p></div>
-          </article>
-
-          <article class="card" data-note="Wellness, laps and long weekends.">
-            <div class="img"><img src="./Assets/Swmming_pool.png" alt="Athlete Swimming Pool" onerror="this.style.display='none'"></div><span class="tag">Wellness</span>
-            <div class="txt"><h3>Athlete<br>Swimming Pool</h3><p>A full-length pool made for laps and long weekends.</p></div>
-          </article>
-
-          <article class="card" data-note="More lifestyle amenities to explore.">
-            <div class="img"><img src="./Assets/25+Aminities.png" alt="More amenities" onerror="this.style.display='none'"></div><span class="tag">And more</span>
-            <div class="txt"><h3>25+ More<br>Amenities</h3><p>Explore the complete list of lifestyle amenities.</p></div>
-          </article>
-
+        <div class="ctrl">
+          <div class="cn">
+            <div class="count" aria-live="polite">
+              <span class="cur"><span id="curNum">01</span></span><span class="tot" id="totNum">/04</span>
+            </div>
+            <p class="note" id="note"></p>
+          </div>
+          <div class="btns">
+            <button class="btn prev" id="prev" aria-label="Previous amenity"><svg viewBox="0 0 24 24">
+                <path d="M19 12H5M11 6l-6 6 6 6" />
+              </svg></button>
+            <button class="btn next" id="next" aria-label="Next amenity"><svg viewBox="0 0 24 24">
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg></button>
+          </div>
         </div>
-      </div>
-    </div>
 
+        <div class="vp" id="vp">
+          <div class="slider" id="slider" tabindex="0" aria-label="Amenities slider">
+            <div class="track" id="track">
+
+              <article class="card" data-note="Evenings above the hills, with 360° views.">
+                <div class="img"><img src="./Assets/Roof_top_cafe.png" alt="360° Rooftop Resto Bar"
+                    onerror="this.style.display='none'"></div><span class="tag">Dining</span>
+                <div class="txt">
+                  <h3>360° Rooftop<br>Resto Bar</h3>
+                  <p>Sunset dining and sky-high evenings above the hills.</p>
+                </div>
+              </article>
+
+              <article class="card" data-note="Fitness with a view of the valley.">
+                <div class="img"><img src="./Assets/Hill_view_GYM.png" alt="Hill-view Gym"
+                    onerror="this.style.display='none'"></div><span class="tag">Fitness</span>
+                <div class="txt">
+                  <h3>Hill-view<br>Gym</h3>
+                  <p>Train with open valley views and modern equipment.</p>
+                </div>
+              </article>
+
+              <article class="card" data-note="Recreation in the calm of nature.">
+                <div class="img"><img src="./Assets/Horse_ridding_arena.png" alt="Horse Riding Arena"
+                    onerror="this.style.display='none'"></div><span class="tag">Recreation</span>
+                <div class="txt">
+                  <h3>Horse Riding<br>Arena</h3>
+                  <p>A dedicated arena for riding in the calm of nature.</p>
+                </div>
+              </article>
+
+              <article class="card" data-note="Wellness, laps and long weekends.">
+                <div class="img"><img src="./Assets/Swmming_pool.png" alt="Athlete Swimming Pool"
+                    onerror="this.style.display='none'"></div><span class="tag">Wellness</span>
+                <div class="txt">
+                  <h3>Athlete<br>Swimming Pool</h3>
+                  <p>A full-length pool made for laps and long weekends.</p>
+                </div>
+              </article>
+
+              <article class="card more" id="moreCard" role="button" tabindex="0" aria-haspopup="dialog"
+                aria-controls="amenModal" aria-label="Explore more amenities — view all 25 additional amenities"
+                data-note="25 more amenities, one tap away.">
+                <div class="img"><img src="./Assets/25+Aminities.png" alt="" onerror="this.style.display='none'"></div>
+                <span class="tag">And more</span>
+                <div class="more-cta" aria-hidden="true">
+                  <span class="more-pill">Explore More <svg viewBox="0 0 24 24">
+                      <path d="M5 12h14M13 6l6 6-6 6" />
+                    </svg></span>
+                </div>
+                <div class="txt">
+                  <h3>25+ More<br>Amenities</h3>
+                  <p>Tap to explore the complete list of lifestyle amenities.</p>
+                </div>
+              </article>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="hint" id="hint">Scroll</div>
+    </section>
   </div>
-  <div class="hint" id="hint">Scroll</div>
-</section>
-</div>
 
+  <!-- Amenities modal -->
+  <div class="s4m" id="amenModal" role="dialog" aria-modal="true" aria-labelledby="amenTitle" aria-hidden="true">
+    <div class="s4m__bd" data-close></div>
+    <div class="s4m__dlg" id="amenDlg">
+      <div class="s4m__head">
+        <div>
+          <span class="s4m__chip">Seven Hills Wai</span>
+          <h2 class="s4m__title" id="amenTitle">25+ More Amenities</h2>
+          <p class="s4m__sub">Everything for everyday comfort, recreation, wellness and peace of mind — all within the
+            community.</p>
+        </div>
+        <button class="s4m__close" id="amenClose" type="button" aria-label="Close amenities"><svg viewBox="0 0 24 24">
+            <path d="M6 6l12 12M18 6L6 18" />
+          </svg></button>
+      </div>
+      <div class="s4m__body" id="amenBody" tabindex="-1">
+        <div id="amenGrid"></div>
+      </div>
+    </div>
+  </div>
 
-<!-- =====================================================================
+  <!-- =====================================================================
      5) LEGAL & SECURITY
      ===================================================================== -->
-<div class="s5">
-<section class="legal" id="legal">
-  <div class="legal-grid">
+  <div class="s5">
+    <section class="legal" id="legal">
+      <div class="legal-grid">
 
-    <div>
-      <div class="badge" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>
+        <div>
+          <div class="badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6l7-3z" />
+              <path d="M9 12l2 2 4-4" />
+            </svg>
+          </div>
+          <h2>Legal &amp;<br>Security</h2>
+          <div class="divider"></div>
+          <p class="lead">Developed with clear legal documentation, secure premises, and reliable safety features for
+            complete peace of mind.</p>
+          <a href="#documents" class="btn">View Documents</a>
+        </div>
+
+        <div>
+          <div class="eyebrow">WHAT WE OFFER</div>
+          <ul class="offer-list" id="offerList">
+
+            <li class="offer">
+              <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M7 3h7l4 4v14H7z" />
+                  <path d="M14 3v4h4M10 12h5M10 16h5" />
+                </svg></span>
+              <div>
+                <h3>7/12</h3>
+                <p>Clear 7/12 land records for transparent ownership.</p>
+              </div>
+            </li>
+
+            <li class="offer active">
+              <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M3 9l9-5 9 5M5 10v8M9 10v8M15 10v8M19 10v8M3 20h18" />
+                </svg></span>
+              <div>
+                <h3>Bank Approval</h3>
+                <p>Bank-approved property for added financial confidence.</p>
+              </div>
+            </li>
+
+            <li class="offer">
+              <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z" />
+                  <path d="M9 4v14M15 6v14" />
+                </svg></span>
+              <div>
+                <h3>NA Plots</h3>
+                <p>Legally approved NA plots, ready for your dream home.</p>
+              </div>
+            </li>
+
+            <li class="offer">
+              <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6l7-3z" />
+                  <path d="M9 12l2 2 4-4" />
+                </svg></span>
+              <div>
+                <h3>RERA Registered - P52700011037</h3>
+                <p>RERA registered for secure and transparent investment.</p>
+              </div>
+            </li>
+
+          </ul>
+        </div>
+
       </div>
-      <h2>Legal &amp;<br>Security</h2>
-      <div class="divider"></div>
-      <p class="lead">Developed with clear legal documentation, secure premises, and reliable safety features for complete peace of mind.</p>
-      <a href="#documents" class="btn">View Documents</a>
-    </div>
-
-    <div>
-      <div class="eyebrow">WHAT WE OFFER</div>
-      <ul class="offer-list" id="offerList">
-
-        <li class="offer">
-          <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 12h5M10 16h5"/></svg></span>
-          <div><h3>7/12</h3><p>Clear 7/12 land records for transparent ownership.</p></div>
-        </li>
-
-        <li class="offer active">
-          <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-5 9 5M5 10v8M9 10v8M15 10v8M19 10v8M3 20h18"/></svg></span>
-          <div><h3>Bank Approval</h3><p>Bank-approved property for added financial confidence.</p></div>
-        </li>
-
-        <li class="offer">
-          <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"/><path d="M9 4v14M15 6v14"/></svg></span>
-          <div><h3>NA Plots</h3><p>Legally approved NA plots, ready for your dream home.</p></div>
-        </li>
-
-        <li class="offer">
-          <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></span>
-          <div><h3>RERA Registered - P52700011037</h3><p>RERA registered for secure and transparent investment.</p></div>
-        </li>
-
-      </ul>
-    </div>
-
+    </section>
   </div>
-</section>
-</div>
 
-<!-- =====================================================================
+  <!-- =====================================================================
      7) BANKING TIE-UPS
      ===================================================================== -->
-<div class="s7">
-<div class="bk">
+  <div class="s7">
+    <div class="bk">
 
-  <header class="bk-hero">
-    <div class="bk-copy reveal">
-      <div class="bk-eyebrow">Seven Hills</div>
-      <h1><strong>Banking</strong> Tie-Ups</h1>
-      <p class="bk-sub">Home loan support from trusted banks and financial institutions</p>
-      <div class="bk-feats">
-        <div class="bk-feat"><i><svg viewBox="0 0 24 24"><path d="M12 3 4.5 6v5.5c0 4.5 3.2 8 7.5 9.5 4.3-1.5 7.5-5 7.5-9.5V6L12 3Z"/><path d="m9 12 2 2 4-4"/></svg></i><span>Trusted<br>Partners</span></div>
-        <div class="bk-feat"><i><svg viewBox="0 0 24 24"><path d="M19 5 5 19"/><circle cx="7" cy="7" r="2.2"/><circle cx="17" cy="17" r="2.2"/></svg></i><span>Competitive<br>Interest Rates</span></div>
-        <div class="bk-feat"><i><svg viewBox="0 0 24 24"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 12h5M10 16h5"/></svg></i><span>Hassle-Free<br>Loan Process</span></div>
-      </div>
-    </div>
-
-    <!-- photo: add style="--bk-photo:url('home-loan.jpg')" to replace the illustration -->
-    <div class="bk-visual reveal" style="--delay:120ms">
-      <svg class="scene" viewBox="0 0 640 440" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
-  <defs>
-    <linearGradient id="bkSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f6f8ea"/><stop offset="1" stop-color="#e3ecd0"/></linearGradient>
-    <linearGradient id="bkH1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d9e3c4"/><stop offset="1" stop-color="#cbd9b1"/></linearGradient>
-    <linearGradient id="bkH2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#aebf8c"/><stop offset="1" stop-color="#93a874"/></linearGradient>
-    <linearGradient id="bkH3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6f8a4c"/><stop offset="1" stop-color="#4d6a37"/></linearGradient>
-    <linearGradient id="bkWall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ece5d6"/><stop offset="1" stop-color="#d9d0bc"/></linearGradient>
-    <linearGradient id="bkGlass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#cfe3ea"/><stop offset="1" stop-color="#8fb0bd"/></linearGradient>
-  </defs>
-  <rect width="640" height="440" fill="url(#bkSky)"/>
-  <circle cx="470" cy="92" r="46" fill="#fff" opacity=".55"/>
-  <path d="M0 250 C70 214 120 206 186 232 S300 250 360 214 S500 176 640 226 V440 H0Z" fill="url(#bkH1)"/>
-  <path d="M0 292 C80 250 150 262 230 284 S380 300 450 262 S580 236 640 270 V440 H0Z" fill="url(#bkH2)"/>
-  <path d="M0 344 C90 312 170 322 260 340 S420 360 520 322 S600 312 640 326 V440 H0Z" fill="url(#bkH3)"/>
-
-  <!-- trees, left -->
-  <g fill="#4a6a35"><circle cx="70" cy="318" r="24"/><circle cx="96" cy="326" r="19"/><circle cx="50" cy="334" r="18"/></g>
-  <g fill="#3d5b2c"><path d="M150 342 168 296 186 342Z"/><path d="M158 326 168 288 178 326Z" opacity=".7"/></g>
-  <!-- house -->
-  <g>
-    <ellipse cx="470" cy="346" rx="150" ry="14" fill="#2f4524" opacity=".28"/>
-    <rect x="352" y="262" width="244" height="86" fill="url(#bkWall)"/>
-    <rect x="388" y="214" width="172" height="52" fill="#e6dfce"/>
-    <rect x="340" y="254" width="268" height="9" rx="2" fill="#3a3d36"/>
-    <rect x="376" y="206" width="196" height="9" rx="2" fill="#3a3d36"/>
-    <rect x="404" y="226" width="120" height="30" fill="url(#bkGlass)"/>
-    <path d="M444 226v30M484 226v30" stroke="#f4f4ee" stroke-width="2"/>
-    <rect x="366" y="276" width="86" height="62" fill="url(#bkGlass)"/><path d="M394 276v62M424 276v62" stroke="#f4f4ee" stroke-width="2"/>
-    <rect x="470" y="276" width="104" height="72" fill="#a98a63"/>
-    <path d="M470 292h104M470 308h104M470 324h104" stroke="#8f7350" stroke-width="1.5"/>
-    <rect x="536" y="288" width="26" height="60" fill="#3a3d36"/>
-    <path d="M388 214h172" stroke="#fff" stroke-opacity=".5"/>
-  </g>
-  <!-- trees, right -->
-  <g fill="#587a3b"><circle cx="338" cy="320" r="26"/><circle cx="318" cy="334" r="18"/></g>
-  <g fill="#3d5b2c"><path d="M606 346 624 292 642 346Z"/><path d="M590 346 604 304 618 346Z" opacity=".85"/></g>
-  <g fill="#6a8c47"><circle cx="560" cy="352" r="22"/><circle cx="520" cy="360" r="17"/><circle cx="420" cy="360" r="16"/><circle cx="380" cy="358" r="20"/></g>
-  <path d="M0 392 C120 372 220 386 330 380 S540 364 640 384 V440 H0Z" fill="#e8efd6"/>
-  <path d="M0 414 C140 398 260 410 380 404 S560 396 640 410 V440 H0Z" fill="#f1f5e3"/>
-</svg>
-      <div class="bk-glass">
-        <div class="k">Your Dream Home</div>
-        <h3>Easier to Own</h3>
-        <p>Simple loan options with trusted financial partners.</p>
-      </div>
-    </div>
-  </header>
-
-  <section class="bk-grid" aria-label="Banking partners">
-    <article class="bk-card reveal" style="--delay:80ms">
-      <div class="bk-head">
-        <div class="ic"><svg viewBox="0 0 32 32"><path d="M4 12 16 5l12 7M6 13h20M8 13v11M13 13v11M19 13v11M24 13v11M5 25h22M3 28h26"/></svg></div>
-        <div class="tt"><small>National / Private</small><h2>Banks</h2></div>
-        <p class="note">Get home loan support from leading banks across India.</p>
-      </div>
-      <div class="bk-list">
-        <a class="bk-row" href="./Assets/bank icon 4/IDBI_bank.svg" aria-label="IDBI Bank"><span class="bk-logo has-img"><img src="./Assets/bank icon 4/IDBI_bank.svg" alt="IDBI Bank logo"></span><span class="bk-txt"><b>IDBI Bank</b><span>Industrial Development Bank of India</span></span><span class="go">›</span></a>
-        <a class="bk-row" href="#" aria-label="State Bank of India"><span class="bk-logo has-img"><img src="./Assets/bank icon 4/SBI_icon.svg" alt="State Bank of India logo"></span><span class="bk-txt"><b>SBI</b><span>State Bank of India</span></span><span class="go">›</span></a>
-        <a class="bk-row" href="#" aria-label="HDFC Bank"><span class="bk-logo has-img"><img src="./Assets/bank icon 4/HDFC_Bank.svg" alt="HDFC Bank logo"></span><span class="bk-txt"><b>HDFC Bank</b><span>Housing Development Finance Corp.</span></span><span class="go">›</span></a>
-        <a class="bk-row" href="#" aria-label="Punjab National Bank"><span class="bk-logo has-img"><img src="./Assets/bank icon 4/Panjab_bank.svg" alt="Punjab National Bank logo"></span><span class="bk-txt"><b>Punjab National Bank</b><span>Punjab National Bank</span></span><span class="go">›</span></a>
-      </div>
-    </article>
-
-    <article class="bk-card reveal" style="--delay:180ms">
-      <div class="bk-head">
-        <div class="ic"><svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="2.6"/><circle cx="16.5" cy="9" r="2.2"/><path d="M3.5 19c0-3 2-5 4.5-5s4.5 2 4.5 5M13.5 19c0-2.4 1.4-4 3.2-4s3.8 1.6 3.8 4"/></svg></div>
-        <div class="tt"><small>NBFC / Credit</small><h2>Societies</h2></div>
-        <p class="note">Flexible home loan options from trusted societies.</p>
-      </div>
-      <div class="bk-list societies">
-        <a class="bk-row" href="#" aria-label="Jankalyan"><span class="bk-logo lg-jan"><svg viewBox="0 0 24 24"><path d="M12 20c-4-2-7-5-7-9 0-2 1.6-3.5 3.5-3.5 1.4 0 2.8.8 3.5 2 .7-1.2 2.1-2 3.5-2C17.4 7.5 19 9 19 11c0 4-3 7-7 9Z"/></svg></span><span class="bk-txt"><b>Jankalyan</b><span>Nagari Sahakari Patsanstha Maryadit Karad</span></span><span class="go">›</span></a>
-        <a class="bk-row" href="#" aria-label="Utkarsha"><span class="bk-logo lg-utk"><svg viewBox="0 0 24 24"><path d="M12 21v-8M12 13c0-4-3-6-7-6 0 4 3 6 7 6ZM12 15c0-3 2.5-5 6-5 0 3-2.5 5-6 5Z"/></svg></span><span class="bk-txt"><b>Utkarsha</b><span>Nagari Sahakari Patsanstha Maryadit Wai</span></span><span class="go">›</span></a>
-        <a class="bk-row" href="#" aria-label="Motilal Housing"><span class="bk-logo lg-mot"><svg viewBox="0 0 24 24"><path d="M4 11 12 4l8 7M6 10v10h12V10M10 20v-5h4v5"/></svg></span><span class="bk-txt"><b>Motilal Housing</b><span>Motilal Oswal Home Finance Limited (MOHFL)</span></span><span class="go">›</span></a>
-      </div>
-    </article>
-  </section>
-
-  <div class="bk-foot reveal"><span>Financing made simpler<i></i>Your home, your next chapter</span></div>
-</div>
-</div>
-
-
-<section class="shw" id="site-map" aria-label="Seven Hills Wai Site Map">
-  <div class="shw-inner">
-    <div class="shw-head">
-      <div class="shw-title">
-        <span class="shw-tag">Seven Hills Wai</span>
-        <h2>Site<span>Map</span></h2>
-      </div>
-      <div class="shw-meta">
-        <p>Wide internal roads, open spaces and a dedicated amenities zone, set against a green hillside.</p>
-        <div class="shw-label">Plots starting from</div>
-        <div class="shw-count">
-          <div>
-            <div class="shw-num" id="shw-counter" data-to="1625">1625</div>
-            <div class="shw-bar"><i></i></div>
+      <header class="bk-hero">
+        <div class="bk-copy reveal">
+          <div class="bk-eyebrow">Seven Hills</div>
+          <h1><strong>Banking</strong> Tie-Ups</h1>
+          <p class="bk-sub">Home loan support from trusted banks and financial institutions</p>
+          <div class="bk-feats">
+            <div class="bk-feat"><i><svg viewBox="0 0 24 24">
+                  <path d="M12 3 4.5 6v5.5c0 4.5 3.2 8 7.5 9.5 4.3-1.5 7.5-5 7.5-9.5V6L12 3Z" />
+                  <path d="m9 12 2 2 4-4" />
+                </svg></i><span>Trusted<br>Partners</span></div>
+            <div class="bk-feat"><i><svg viewBox="0 0 24 24">
+                  <path d="M19 5 5 19" />
+                  <circle cx="7" cy="7" r="2.2" />
+                  <circle cx="17" cy="17" r="2.2" />
+                </svg></i><span>Competitive<br>Interest Rates</span></div>
+            <div class="bk-feat"><i><svg viewBox="0 0 24 24">
+                  <path d="M7 3h7l4 4v14H7z" />
+                  <path d="M14 3v4h4M10 12h5M10 16h5" />
+                </svg></i><span>Hassle-Free<br>Loan Process</span></div>
           </div>
-          <span class="shw-unit">sqft</span>
+        </div>
+
+        <!-- photo: add style="--bk-photo:url('home-loan.jpg')" to replace the illustration -->
+        <div class="bk-visual reveal" style="--delay:120ms">
+          <svg class="scene" viewBox="0 0 640 440" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+            <defs>
+              <linearGradient id="bkSky" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#f6f8ea" />
+                <stop offset="1" stop-color="#e3ecd0" />
+              </linearGradient>
+              <linearGradient id="bkH1" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#d9e3c4" />
+                <stop offset="1" stop-color="#cbd9b1" />
+              </linearGradient>
+              <linearGradient id="bkH2" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#aebf8c" />
+                <stop offset="1" stop-color="#93a874" />
+              </linearGradient>
+              <linearGradient id="bkH3" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#6f8a4c" />
+                <stop offset="1" stop-color="#4d6a37" />
+              </linearGradient>
+              <linearGradient id="bkWall" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#ece5d6" />
+                <stop offset="1" stop-color="#d9d0bc" />
+              </linearGradient>
+              <linearGradient id="bkGlass" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#cfe3ea" />
+                <stop offset="1" stop-color="#8fb0bd" />
+              </linearGradient>
+            </defs>
+            <rect width="640" height="440" fill="url(#bkSky)" />
+            <circle cx="470" cy="92" r="46" fill="#fff" opacity=".55" />
+            <path d="M0 250 C70 214 120 206 186 232 S300 250 360 214 S500 176 640 226 V440 H0Z" fill="url(#bkH1)" />
+            <path d="M0 292 C80 250 150 262 230 284 S380 300 450 262 S580 236 640 270 V440 H0Z" fill="url(#bkH2)" />
+            <path d="M0 344 C90 312 170 322 260 340 S420 360 520 322 S600 312 640 326 V440 H0Z" fill="url(#bkH3)" />
+
+            <!-- trees, left -->
+            <g fill="#4a6a35">
+              <circle cx="70" cy="318" r="24" />
+              <circle cx="96" cy="326" r="19" />
+              <circle cx="50" cy="334" r="18" />
+            </g>
+            <g fill="#3d5b2c">
+              <path d="M150 342 168 296 186 342Z" />
+              <path d="M158 326 168 288 178 326Z" opacity=".7" />
+            </g>
+            <!-- house -->
+            <g>
+              <ellipse cx="470" cy="346" rx="150" ry="14" fill="#2f4524" opacity=".28" />
+              <rect x="352" y="262" width="244" height="86" fill="url(#bkWall)" />
+              <rect x="388" y="214" width="172" height="52" fill="#e6dfce" />
+              <rect x="340" y="254" width="268" height="9" rx="2" fill="#3a3d36" />
+              <rect x="376" y="206" width="196" height="9" rx="2" fill="#3a3d36" />
+              <rect x="404" y="226" width="120" height="30" fill="url(#bkGlass)" />
+              <path d="M444 226v30M484 226v30" stroke="#f4f4ee" stroke-width="2" />
+              <rect x="366" y="276" width="86" height="62" fill="url(#bkGlass)" />
+              <path d="M394 276v62M424 276v62" stroke="#f4f4ee" stroke-width="2" />
+              <rect x="470" y="276" width="104" height="72" fill="#a98a63" />
+              <path d="M470 292h104M470 308h104M470 324h104" stroke="#8f7350" stroke-width="1.5" />
+              <rect x="536" y="288" width="26" height="60" fill="#3a3d36" />
+              <path d="M388 214h172" stroke="#fff" stroke-opacity=".5" />
+            </g>
+            <!-- trees, right -->
+            <g fill="#587a3b">
+              <circle cx="338" cy="320" r="26" />
+              <circle cx="318" cy="334" r="18" />
+            </g>
+            <g fill="#3d5b2c">
+              <path d="M606 346 624 292 642 346Z" />
+              <path d="M590 346 604 304 618 346Z" opacity=".85" />
+            </g>
+            <g fill="#6a8c47">
+              <circle cx="560" cy="352" r="22" />
+              <circle cx="520" cy="360" r="17" />
+              <circle cx="420" cy="360" r="16" />
+              <circle cx="380" cy="358" r="20" />
+            </g>
+            <path d="M0 392 C120 372 220 386 330 380 S540 364 640 384 V440 H0Z" fill="#e8efd6" />
+            <path d="M0 414 C140 398 260 410 380 404 S560 396 640 410 V440 H0Z" fill="#f1f5e3" />
+          </svg>
+          <div class="bk-glass">
+            <div class="k">Your Dream Home</div>
+            <h3>Easier to Own</h3>
+            <p>Simple loan options with trusted financial partners.</p>
+          </div>
+        </div>
+      </header>
+
+      <section class="bk-grid" aria-label="Banking partners">
+        <article class="bk-card reveal" style="--delay:80ms">
+          <div class="bk-head">
+            <div class="ic"><svg viewBox="0 0 32 32">
+                <path d="M4 12 16 5l12 7M6 13h20M8 13v11M13 13v11M19 13v11M24 13v11M5 25h22M3 28h26" />
+              </svg></div>
+            <div class="tt"><small>National / Private</small>
+              <h2>Banks</h2>
+            </div>
+            <p class="note">Get home loan support from leading banks across India.</p>
+          </div>
+          <div class="bk-list">
+            <a class="bk-row" href="./Assets/bank icon 4/IDBI_bank.svg" aria-label="IDBI Bank"><span
+                class="bk-logo has-img"><img src="./Assets/bank icon 4/IDBI_bank.svg" alt="IDBI Bank logo"></span><span
+                class="bk-txt"><b>IDBI Bank</b><span>Industrial Development Bank of India</span></span><span
+                class="go">›</span></a>
+            <a class="bk-row" href="#" aria-label="State Bank of India"><span class="bk-logo has-img"><img
+                  src="./Assets/bank icon 4/SBI_icon.svg" alt="State Bank of India logo"></span><span
+                class="bk-txt"><b>SBI</b><span>State Bank of India</span></span><span class="go">›</span></a>
+            <a class="bk-row" href="#" aria-label="HDFC Bank"><span class="bk-logo has-img"><img
+                  src="./Assets/bank icon 4/HDFC_Bank.svg" alt="HDFC Bank logo"></span><span class="bk-txt"><b>HDFC
+                  Bank</b><span>Housing Development Finance Corp.</span></span><span class="go">›</span></a>
+            <a class="bk-row" href="#" aria-label="Punjab National Bank"><span class="bk-logo has-img"><img
+                  src="./Assets/bank icon 4/Panjab_bank.svg" alt="Punjab National Bank logo"></span><span
+                class="bk-txt"><b>Punjab National Bank</b><span>Punjab National Bank</span></span><span
+                class="go">›</span></a>
+          </div>
+        </article>
+
+        <article class="bk-card reveal" style="--delay:180ms">
+          <div class="bk-head">
+            <div class="ic"><svg viewBox="0 0 24 24">
+                <circle cx="8" cy="8" r="2.6" />
+                <circle cx="16.5" cy="9" r="2.2" />
+                <path d="M3.5 19c0-3 2-5 4.5-5s4.5 2 4.5 5M13.5 19c0-2.4 1.4-4 3.2-4s3.8 1.6 3.8 4" />
+              </svg></div>
+            <div class="tt"><small>NBFC / Credit</small>
+              <h2>Societies</h2>
+            </div>
+            <p class="note">Flexible home loan options from trusted societies.</p>
+          </div>
+          <div class="bk-list societies">
+            <a class="bk-row" href="#" aria-label="Jankalyan"><span class="bk-logo lg-jan"><svg viewBox="0 0 24 24">
+                  <path
+                    d="M12 20c-4-2-7-5-7-9 0-2 1.6-3.5 3.5-3.5 1.4 0 2.8.8 3.5 2 .7-1.2 2.1-2 3.5-2C17.4 7.5 19 9 19 11c0 4-3 7-7 9Z" />
+                </svg></span><span class="bk-txt"><b>Jankalyan</b><span>Nagari Sahakari Patsanstha Maryadit
+                  Karad</span></span><span class="go">›</span></a>
+            <a class="bk-row" href="#" aria-label="Utkarsha"><span class="bk-logo lg-utk"><svg viewBox="0 0 24 24">
+                  <path d="M12 21v-8M12 13c0-4-3-6-7-6 0 4 3 6 7 6ZM12 15c0-3 2.5-5 6-5 0 3-2.5 5-6 5Z" />
+                </svg></span><span class="bk-txt"><b>Utkarsha</b><span>Nagari Sahakari Patsanstha Maryadit
+                  Wai</span></span><span class="go">›</span></a>
+            <a class="bk-row" href="#" aria-label="Motilal Housing"><span class="bk-logo lg-mot"><svg
+                  viewBox="0 0 24 24">
+                  <path d="M4 11 12 4l8 7M6 10v10h12V10M10 20v-5h4v5" />
+                </svg></span><span class="bk-txt"><b>Motilal Housing</b><span>Motilal Oswal Home Finance Limited
+                  (MOHFL)</span></span><span class="go">›</span></a>
+          </div>
+        </article>
+      </section>
+
+      <div class="bk-foot reveal"><span>Financing made simpler<i></i>Your home, your next chapter</span></div>
+    </div>
+  </div>
+
+
+  <section class="shw" id="site-map" aria-label="Seven Hills Wai Site Map">
+    <div class="shw-inner">
+      <div class="shw-head">
+        <div class="shw-title">
+          <span class="shw-tag">Seven Hills Wai</span>
+          <h2>Site<span>Map</span></h2>
+        </div>
+        <div class="shw-meta">
+          <p>Wide internal roads, open spaces and a dedicated amenities zone, set against a green hillside.</p>
+          <div class="shw-label">Plots starting from</div>
+          <div class="shw-count">
+            <div>
+              <div class="shw-num" id="shw-counter" data-to="1625">1625</div>
+              <div class="shw-bar"><i></i></div>
+            </div>
+            <span class="shw-unit">sqft</span>
+          </div>
         </div>
       </div>
+
+      <div class="shw-card">
+        <img class="shw-img-desktop" src="./Assets/Site_map.png" width="2021" height="778"
+          alt="Seven Hills Wai site map" loading="lazy">
+        <img class="shw-img-mobile" src="./Assets/site_map_mobile_view.png" width="2021" height="778"
+          alt="Seven Hills Wai site map" loading="lazy">
+      </div>
     </div>
+  </section>
 
-    <div class="shw-card">
-      <img class="shw-img-desktop" src="./Assets/Site_map.png" width="2021" height="778" alt="Seven Hills Wai site map" loading="lazy">
-      <img class="shw-img-mobile" src="./Assets/site_map_mobile_view.png" width="2021" height="778" alt="Seven Hills Wai site map" loading="lazy">
-    </div>
-  </div>
-</section>
+  <script>
+    (function () {
+      var el = document.getElementById('shw-counter');
+      if (!el || !('IntersectionObserver' in window)) return;
 
-<script>
-  (function () {
-    var el = document.getElementById('shw-counter');
-    if (!el || !('IntersectionObserver' in window)) return;
-
-    var to = +el.dataset.to;
-    var done = false;
-    function run() {
-      var start = null;
-      var duration = 1400;
-      function step(timestamp) {
-        if (start === null) start = timestamp;
-        var progress = Math.min((timestamp - start) / duration, 1);
-        el.textContent = Math.round(to * (1 - Math.pow(1 - progress, 3)));
-        if (progress < 1) requestAnimationFrame(step);
+      var to = +el.dataset.to;
+      var done = false;
+      function run() {
+        var start = null;
+        var duration = 1400;
+        function step(timestamp) {
+          if (start === null) start = timestamp;
+          var progress = Math.min((timestamp - start) / duration, 1);
+          el.textContent = Math.round(to * (1 - Math.pow(1 - progress, 3)));
+          if (progress < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
       }
-      requestAnimationFrame(step);
-    }
 
-    var observer = new IntersectionObserver(function (entries) {
-      if (entries[0].isIntersecting && !done) {
-        done = true;
-        run();
-        observer.disconnect();
-      }
-    }, { threshold: 0.4 });
-    observer.observe(el);
-  })();
-</script>
+      var observer = new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting && !done) {
+          done = true;
+          run();
+          observer.disconnect();
+        }
+      }, { threshold: 0.4 });
+      observer.observe(el);
+    })();
+  </script>
 
-<!-- =====================================================================
+  <!-- =====================================================================
      8) INVESTMENT OPTIONS (pricing)
      ===================================================================== -->
-<div class="s8">
-<section class="iv-pricing" id="pricing">
-  <div class="iv-head">
-    <div class="iv-eyebrow">PRICING</div>
-    <h2>Investment <span>Options</span></h2>
-    <p>Attractive and competitive pricing with flexible options designed to deliver strong value and long-term investment potential.</p>
+  <div class="s8">
+    <section class="iv-pricing" id="pricing">
+      <div class="iv-head">
+        <div class="iv-eyebrow">PRICING</div>
+        <h2>Investment <span>Options</span></h2>
+        <p>Attractive and competitive pricing with flexible options designed to deliver strong value and long-term
+          investment potential.</p>
+      </div>
+
+      <div class="iv-grid">
+
+        <article class="iv-card">
+          <div class="iv-thumb">
+            <!-- IMAGE: put your photo in images/plots/ (covers the placeholder artwork below) -->
+            <img src="./Assets/1625 SQ.FT.png" alt="1625 sq.ft plot" onerror="this.style.display='none'">
+            <svg viewBox="0 0 300 130" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <defs>
+                <linearGradient id="ivg1" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#f6c98a" />
+                  <stop offset="1" stop-color="#e8dcc0" />
+                </linearGradient>
+              </defs>
+              <rect width="300" height="130" fill="url(#ivg1)" />
+              <circle cx="215" cy="52" r="16" fill="#fff3d0" opacity=".9" />
+              <path d="M0 80 L60 50 L110 72 L170 40 L240 70 L300 52 V130 H0Z" fill="#8a9a78" />
+              <path d="M0 98 L70 74 L140 92 L210 70 L300 92 V130 H0Z" fill="#5f7a43" />
+              <path d="M0 112 Q80 96 160 110 T300 104 V130 H0Z" fill="#3f5a2a" />
+            </svg>
+            <span class="iv-badge"><svg viewBox="0 0 24 24">
+                <path
+                  d="M17 8C8 10 5.9 16.2 3.8 21.3L5.7 22c.7-1.6 1.4-3 2.4-4.2 5.4 1.8 11.9-1.3 12.9-13.8-1.3.5-2.8 1.5-4 4z" />
+              </svg>1625 SQ.FT</span>
+          </div>
+          <h3>1625 SQ.FT</h3>
+          <p class="iv-tag">Perfect to begin<br>your legacy</p>
+          <div class="iv-price-row">
+            <div><small>Starting Price</small><strong>₹28 Lakhs*</strong></div>
+            <a class="iv-go" data-iv-form href="#sh-contact" aria-label="View 1625 sq.ft details"><svg
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg></a>
+          </div>
+        </article>
+
+        <article class="iv-card">
+          <div class="iv-thumb">
+            <!-- IMAGE: put your photo in images/plots/ (covers the placeholder artwork below) -->
+            <img src="./Assets/3250 SQ.FT.png" alt="3250 sq.ft plot" onerror="this.style.display='none'">
+            <svg viewBox="0 0 300 130" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <defs>
+                <linearGradient id="ivg2" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#f3b96f" />
+                  <stop offset="1" stop-color="#e9d9b5" />
+                </linearGradient>
+              </defs>
+              <rect width="300" height="130" fill="url(#ivg2)" />
+              <circle cx="110" cy="62" r="18" fill="#fff0c4" opacity=".95" />
+              <path d="M0 78 L70 56 L130 74 L210 48 L300 76 V130 H0Z" fill="#8c9a7a" />
+              <rect y="96" width="300" height="34" fill="#6d9a3a" />
+              <path d="M180 100 h70 v-4 h-70z M186 96 v-18 M244 96 v-18" stroke="#3b2f22" stroke-width="3"
+                fill="none" />
+              <rect x="178" y="72" width="76" height="6" fill="#4a3a2a" />
+              <path d="M250 40 q-26 6-24 36 h4 q-2-22 20-30z" fill="#2d4a22" />
+              <rect x="262" y="40" width="5" height="56" fill="#3b2f22" />
+              <circle cx="264" cy="30" r="22" fill="#2d4a22" />
+            </svg>
+            <span class="iv-badge"><svg viewBox="0 0 24 24">
+                <path
+                  d="M17 8C8 10 5.9 16.2 3.8 21.3L5.7 22c.7-1.6 1.4-3 2.4-4.2 5.4 1.8 11.9-1.3 12.9-13.8-1.3.5-2.8 1.5-4 4z" />
+              </svg>3250 SQ.FT</span>
+          </div>
+          <h3>3250 SQ.FT</h3>
+          <p class="iv-tag">Balanced space<br>premium living</p>
+          <div class="iv-price-row">
+            <div><small>Starting Price</small><strong>₹55 Lakhs*</strong></div>
+            <a class="iv-go" data-iv-form href="#sh-contact" aria-label="View 3250 sq.ft details"><svg
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg></a>
+          </div>
+        </article>
+
+        <article class="iv-card">
+          <div class="iv-thumb">
+            <!-- IMAGE: put your photo in images/plots/ (covers the placeholder artwork below) -->
+            <img src="./Assets/3600 SQ.FT.png" alt="3600 sq.ft plot" onerror="this.style.display='none'">
+            <svg viewBox="0 0 300 130" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <defs>
+                <linearGradient id="ivg3" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#f1b377" />
+                  <stop offset="1" stop-color="#e6d6b8" />
+                </linearGradient>
+              </defs>
+              <rect width="300" height="130" fill="url(#ivg3)" />
+              <path d="M0 74 L60 46 L120 68 L190 40 L260 66 L300 54 V130 H0Z" fill="#7f9490" />
+              <path d="M0 88 L80 68 L170 86 L300 66 V130 H0Z" fill="#6a8a58" />
+              <path d="M0 98 H300 V130 H0Z" fill="#cdbf9f" />
+              <path d="M0 102 Q150 92 300 102 V130 H0Z" fill="#6fa8c4" />
+              <rect x="190" y="88" width="60" height="8" rx="3" fill="#4d4338" />
+              <rect x="196" y="82" width="22" height="7" rx="3" fill="#6b5e4e" />
+              <rect x="258" y="38" width="5" height="60" fill="#3b2f22" />
+              <circle cx="262" cy="30" r="24" fill="#2d4a22" />
+            </svg>
+            <span class="iv-badge"><svg viewBox="0 0 24 24">
+                <path
+                  d="M17 8C8 10 5.9 16.2 3.8 21.3L5.7 22c.7-1.6 1.4-3 2.4-4.2 5.4 1.8 11.9-1.3 12.9-13.8-1.3.5-2.8 1.5-4 4z" />
+              </svg>3600 SQ.FT</span>
+          </div>
+          <h3>3600 SQ.FT</h3>
+          <p class="iv-tag">Designed for<br>bigger dreams</p>
+          <div class="iv-price-row">
+            <div><small>Starting Price</small><strong>₹61 Lakhs*</strong></div>
+            <a class="iv-go" data-iv-form href="#sh-contact" aria-label="View 3600 sq.ft details"><svg
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg></a>
+          </div>
+        </article>
+
+        <article class="iv-card">
+          <div class="iv-thumb">
+            <!-- IMAGE: put your photo in images/plots/ (covers the placeholder artwork below) -->
+            <img src="./Assets/5000 SQ.FT.png" alt="5000 sq.ft plot" onerror="this.style.display='none'">
+            <svg viewBox="0 0 300 130" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <defs>
+                <linearGradient id="ivg4" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#f0b97a" />
+                  <stop offset="1" stop-color="#e3d3b4" />
+                </linearGradient>
+              </defs>
+              <rect width="300" height="130" fill="url(#ivg4)" />
+              <path d="M0 82 L80 52 L150 76 L230 56 L300 78 V130 H0Z" fill="#8e9a80" />
+              <path d="M0 96 Q100 80 200 96 T300 90 V130 H0Z" fill="#5f7a43" />
+              <rect x="150" y="30" width="150" height="86" fill="#2c2a26" />
+              <rect x="150" y="30" width="150" height="8" fill="#1a1917" />
+              <rect x="160" y="44" width="130" height="52" fill="#e9b777" opacity=".55" />
+              <rect x="150" y="96" width="150" height="34" fill="#c9a77f" />
+              <rect x="190" y="100" width="40" height="8" rx="3" fill="#4d4338" />
+              <circle cx="60" cy="40" r="22" fill="#2d4a22" />
+              <rect x="58" y="44" width="4" height="50" fill="#3b2f22" />
+            </svg>
+            <span class="iv-badge"><svg viewBox="0 0 24 24">
+                <path
+                  d="M17 8C8 10 5.9 16.2 3.8 21.3L5.7 22c.7-1.6 1.4-3 2.4-4.2 5.4 1.8 11.9-1.3 12.9-13.8-1.3.5-2.8 1.5-4 4z" />
+              </svg>5000 SQ.FT</span>
+          </div>
+          <h3>5000 SQ.FT</h3>
+          <p class="iv-tag">Luxury with<br>more freedom</p>
+          <div class="iv-price-row">
+            <div><small>Starting Price</small><strong>₹85 Lakhs*</strong></div>
+            <a class="iv-go" data-iv-form href="#sh-contact" aria-label="View 5000 sq.ft details"><svg
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg></a>
+          </div>
+        </article>
+
+      </div>
+    </section>
   </div>
 
-  <div class="iv-grid">
 
-    <article class="iv-card">
-      <div class="iv-thumb">
-        <!-- IMAGE: put your photo in images/plots/ (covers the placeholder artwork below) -->
-        <img src="./Assets/1625 SQ.FT.png" alt="1625 sq.ft plot" onerror="this.style.display='none'">
-        <svg viewBox="0 0 300 130" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-          <defs><linearGradient id="ivg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f6c98a"/><stop offset="1" stop-color="#e8dcc0"/></linearGradient></defs>
-          <rect width="300" height="130" fill="url(#ivg1)"/>
-          <circle cx="215" cy="52" r="16" fill="#fff3d0" opacity=".9"/>
-          <path d="M0 80 L60 50 L110 72 L170 40 L240 70 L300 52 V130 H0Z" fill="#8a9a78"/>
-          <path d="M0 98 L70 74 L140 92 L210 70 L300 92 V130 H0Z" fill="#5f7a43"/>
-          <path d="M0 112 Q80 96 160 110 T300 104 V130 H0Z" fill="#3f5a2a"/>
-        </svg>
-        <span class="iv-badge"><svg viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.2 3.8 21.3L5.7 22c.7-1.6 1.4-3 2.4-4.2 5.4 1.8 11.9-1.3 12.9-13.8-1.3.5-2.8 1.5-4 4z"/></svg>1625 SQ.FT</span>
-      </div>
-      <h3>1625 SQ.FT</h3>
-      <p class="iv-tag">Perfect to begin<br>your legacy</p>
-      <div class="iv-price-row">
-        <div><small>Starting Price</small><strong>₹28 Lakhs*</strong></div>
-        <a class="iv-go" data-iv-form href="#sh-contact" aria-label="View 1625 sq.ft details"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      </div>
-    </article>
+  <!-- 8b) Investment Options: arrow buttons -> Typeform -->
 
-    <article class="iv-card">
-      <div class="iv-thumb">
-        <!-- IMAGE: put your photo in images/plots/ (covers the placeholder artwork below) -->
-        <img src="./Assets/3250 SQ.FT.png" alt="3250 sq.ft plot" onerror="this.style.display='none'">
-        <svg viewBox="0 0 300 130" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-          <defs><linearGradient id="ivg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f3b96f"/><stop offset="1" stop-color="#e9d9b5"/></linearGradient></defs>
-          <rect width="300" height="130" fill="url(#ivg2)"/>
-          <circle cx="110" cy="62" r="18" fill="#fff0c4" opacity=".95"/>
-          <path d="M0 78 L70 56 L130 74 L210 48 L300 76 V130 H0Z" fill="#8c9a7a"/>
-          <rect y="96" width="300" height="34" fill="#6d9a3a"/>
-          <path d="M180 100 h70 v-4 h-70z M186 96 v-18 M244 96 v-18" stroke="#3b2f22" stroke-width="3" fill="none"/>
-          <rect x="178" y="72" width="76" height="6" fill="#4a3a2a"/>
-          <path d="M250 40 q-26 6-24 36 h4 q-2-22 20-30z" fill="#2d4a22"/><rect x="262" y="40" width="5" height="56" fill="#3b2f22"/>
-          <circle cx="264" cy="30" r="22" fill="#2d4a22"/>
-        </svg>
-        <span class="iv-badge"><svg viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.2 3.8 21.3L5.7 22c.7-1.6 1.4-3 2.4-4.2 5.4 1.8 11.9-1.3 12.9-13.8-1.3.5-2.8 1.5-4 4z"/></svg>3250 SQ.FT</span>
-      </div>
-      <h3>3250 SQ.FT</h3>
-      <p class="iv-tag">Balanced space<br>premium living</p>
-      <div class="iv-price-row">
-        <div><small>Starting Price</small><strong>₹55 Lakhs*</strong></div>
-        <a class="iv-go" data-iv-form href="#sh-contact" aria-label="View 3250 sq.ft details"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      </div>
-    </article>
+  <style>
+    .cv {
+      --bg: #faf9f5;
+      --ink: #1c1e18;
+      --olive: #6b7a3a;
+      --muted: #6e6f66;
+      --panel: #efeee6;
+      position: relative;
+      width: 100vw;
+      min-height: 760px;
+      margin-left: calc(50% - 50vw);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'DM Sans', system-ui, sans-serif;
+    }
 
-    <article class="iv-card">
-      <div class="iv-thumb">
-        <!-- IMAGE: put your photo in images/plots/ (covers the placeholder artwork below) -->
-        <img src="./Assets/3600 SQ.FT.png" alt="3600 sq.ft plot" onerror="this.style.display='none'">
-        <svg viewBox="0 0 300 130" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-          <defs><linearGradient id="ivg3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1b377"/><stop offset="1" stop-color="#e6d6b8"/></linearGradient></defs>
-          <rect width="300" height="130" fill="url(#ivg3)"/>
-          <path d="M0 74 L60 46 L120 68 L190 40 L260 66 L300 54 V130 H0Z" fill="#7f9490"/>
-          <path d="M0 88 L80 68 L170 86 L300 66 V130 H0Z" fill="#6a8a58"/>
-          <path d="M0 98 H300 V130 H0Z" fill="#cdbf9f"/>
-          <path d="M0 102 Q150 92 300 102 V130 H0Z" fill="#6fa8c4"/>
-          <rect x="190" y="88" width="60" height="8" rx="3" fill="#4d4338"/>
-          <rect x="196" y="82" width="22" height="7" rx="3" fill="#6b5e4e"/>
-          <rect x="258" y="38" width="5" height="60" fill="#3b2f22"/>
-          <circle cx="262" cy="30" r="24" fill="#2d4a22"/>
-        </svg>
-        <span class="iv-badge"><svg viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.2 3.8 21.3L5.7 22c.7-1.6 1.4-3 2.4-4.2 5.4 1.8 11.9-1.3 12.9-13.8-1.3.5-2.8 1.5-4 4z"/></svg>3600 SQ.FT</span>
-      </div>
-      <h3>3600 SQ.FT</h3>
-      <p class="iv-tag">Designed for<br>bigger dreams</p>
-      <div class="iv-price-row">
-        <div><small>Starting Price</small><strong>₹61 Lakhs*</strong></div>
-        <a class="iv-go" data-iv-form href="#sh-contact" aria-label="View 3600 sq.ft details"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      </div>
-    </article>
+    .cv *,
+    .cv *::before,
+    .cv *::after {
+      box-sizing: border-box;
+    }
 
-    <article class="iv-card">
-      <div class="iv-thumb">
-        <!-- IMAGE: put your photo in images/plots/ (covers the placeholder artwork below) -->
-        <img src="./Assets/5000 SQ.FT.png" alt="5000 sq.ft plot" onerror="this.style.display='none'">
-        <svg viewBox="0 0 300 130" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-          <defs><linearGradient id="ivg4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f0b97a"/><stop offset="1" stop-color="#e3d3b4"/></linearGradient></defs>
-          <rect width="300" height="130" fill="url(#ivg4)"/>
-          <path d="M0 82 L80 52 L150 76 L230 56 L300 78 V130 H0Z" fill="#8e9a80"/>
-          <path d="M0 96 Q100 80 200 96 T300 90 V130 H0Z" fill="#5f7a43"/>
-          <rect x="150" y="30" width="150" height="86" fill="#2c2a26"/>
-          <rect x="150" y="30" width="150" height="8" fill="#1a1917"/>
-          <rect x="160" y="44" width="130" height="52" fill="#e9b777" opacity=".55"/>
-          <rect x="150" y="96" width="150" height="34" fill="#c9a77f"/>
-          <rect x="190" y="100" width="40" height="8" rx="3" fill="#4d4338"/>
-          <circle cx="60" cy="40" r="22" fill="#2d4a22"/><rect x="58" y="44" width="4" height="50" fill="#3b2f22"/>
-        </svg>
-        <span class="iv-badge"><svg viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.2 3.8 21.3L5.7 22c.7-1.6 1.4-3 2.4-4.2 5.4 1.8 11.9-1.3 12.9-13.8-1.3.5-2.8 1.5-4 4z"/></svg>5000 SQ.FT</span>
-      </div>
-      <h3>5000 SQ.FT</h3>
-      <p class="iv-tag">Luxury with<br>more freedom</p>
-      <div class="iv-price-row">
-        <div><small>Starting Price</small><strong>₹85 Lakhs*</strong></div>
-        <a class="iv-go" data-iv-form href="#sh-contact" aria-label="View 5000 sq.ft details"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      </div>
-    </article>
+    .cv-head {
+      flex: 0 0 auto;
+      text-align: center;
+      padding: clamp(36px, 7vh, 84px) 24px 0;
+      position: relative;
+      z-index: 5;
+    }
 
-  </div>
-</section>
-</div>
+    .cv-eyebrow {
+      display: inline-block;
+      margin-bottom: 16px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      color: var(--olive);
+    }
 
+    .cv-title {
+      margin: 0 auto;
+      max-width: 20em;
+      font-size: clamp(30px, 4.2vw, 64px);
+      line-height: 1.1;
+      font-weight: 300;
+      letter-spacing: -.045em;
+    }
 
-<!-- 8b) Investment Options: arrow buttons -> Typeform -->
+    .cv-title span {
+      color: var(--olive);
+    }
 
-<style>
-  .cv {
-    --bg: #faf9f5;
-    --ink: #1c1e18;
-    --olive: #6b7a3a;
-    --muted: #6e6f66;
-    --panel: #efeee6;
-    position: relative;
-    width: 100vw;
-    min-height: 760px;
-    margin-left: calc(50% - 50vw);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    background: var(--bg);
-    color: var(--ink);
-    font-family: 'DM Sans', system-ui, sans-serif;
-  }
-  .cv *, .cv *::before, .cv *::after { box-sizing: border-box; }
-  .cv-head { flex: 0 0 auto; text-align: center; padding: clamp(36px, 7vh, 84px) 24px 0; position: relative; z-index: 5; }
-  .cv-eyebrow { display: inline-block; margin-bottom: 16px; font-size: 12px; font-weight: 500; letter-spacing: .24em; text-transform: uppercase; color: var(--olive); }
-  .cv-title { margin: 0 auto; max-width: 20em; font-size: clamp(30px, 4.2vw, 64px); line-height: 1.1; font-weight: 300; letter-spacing: -.045em; }
-  .cv-title span { color: var(--olive); }
-  .cv-sub { margin: 16px auto 0; max-width: 38em; font-size: clamp(13px, 1.1vw, 16px); font-weight: 300; color: var(--muted); }
-  .cv-stage { flex: 1 1 auto; min-height: 0; position: relative; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
-  .cv-card {
-    position: absolute; left: 50%; top: 50%; margin: 0;
-    border-radius: 22px; overflow: hidden;
-    background: var(--panel);
-    cursor: pointer;
-    transition: transform .8s cubic-bezier(.22,.8,.2,1), opacity .5s ease;
-    box-shadow: 0 30px 60px -24px rgba(40,42,28,.5);
-    will-change: transform;
-  }
-  .cv-card img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
-  .cv-veil { position: absolute; inset: 0; background: var(--bg); opacity: 0; pointer-events: none; transition: opacity .8s ease; }
-  .cv-ctrl { flex: 0 0 auto; position: relative; display: flex; justify-content: center; align-items: center; gap: 14px; height: 96px; }
-  .cv-btn {
-    width: 44px; height: 44px; border-radius: 50%;
-    border: 1px solid var(--ink); background: transparent; color: var(--ink);
-    display: grid; place-items: center; cursor: pointer; padding: 0;
-    transition: background .25s, color .25s, transform .25s;
-  }
-  .cv-btn:hover { background: var(--ink); color: var(--bg); transform: scale(1.06); }
-  .cv-btn svg { width: 18px; height: 18px; }
-  .cv-expand {
-    position: absolute; right: clamp(16px, 4vw, 64px); top: 50%; transform: translateY(-50%);
-    width: 52px; height: 52px; border: 0; background: var(--panel);
-  }
-  .cv-expand:hover { transform: translateY(-50%) scale(1.06); }
-  .cv-lb { position: fixed; inset: 0; z-index: 99999; display: none; align-items: center; justify-content: center; background: rgba(22,24,17,.94); }
-  .cv-lb.is-open { display: flex; }
-  .cv-lb img { max-width: 88vw; max-height: 86vh; border-radius: 14px; box-shadow: 0 40px 80px -30px #000; }
-  .cv-lb .cv-btn { position: absolute; border-color: #fff; color: #fff; }
-  .cv-lb .cv-btn:hover { background: #fff; color: var(--ink); }
-  .cv-lb .cv-x { top: 24px; right: 24px; }
-  .cv-lb .cv-lp { left: 24px; top: 50%; margin-top: -22px; }
-  .cv-lb .cv-ln { right: 24px; top: 50%; margin-top: -22px; }
-  @media (max-width: 700px) {
-    .cv { min-height: 640px; }
-    .cv-expand { width: 44px; height: 44px; }
-  }
-</style>
+    .cv-sub {
+      margin: 16px auto 0;
+      max-width: 38em;
+      font-size: clamp(13px, 1.1vw, 16px);
+      font-weight: 300;
+      color: var(--muted);
+    }
 
-<section class="cv" id="shCover" aria-label="Seven Hills Wai gallery">
-  <div class="cv-head">
-    <span class="cv-eyebrow">Gallery</span>
-    <h2 class="cv-title">Where seven hills <span>meet your home</span></h2>
-    <p class="cv-sub">40 acres of NA villa plots in Wai — a glimpse of the land, the views and the life.</p>
-  </div>
+    .cv-stage {
+      flex: 1 1 auto;
+      min-height: 0;
+      position: relative;
+      touch-action: pan-y;
+      user-select: none;
+      -webkit-user-select: none;
+    }
 
-  <div class="cv-stage">
-    <figure class="cv-card"><img src="./Assets/Gallary 2_live_images. png" alt="Seven Hills Wai 1" draggable="false"></figure>
-    <figure class="cv-card"><img src="./Assets/Gallary3_live_images.png" alt="Seven Hills Wai 2" draggable="false"></figure>
-    <figure class="cv-card"><img src="./Assets/Gallary4_live_images.png" alt="Seven Hills Wai 3" draggable="false"></figure>
-    <figure class="cv-card"><img src="./Assets/Gallary 2_live_images. png" alt="Seven Hills Wai 4" draggable="false"></figure>
-    <figure class="cv-card"><img src="./Assets/Gallary_live_images.png" alt="Seven Hills Wai 5" draggable="false"></figure>
-  </div>
+    .cv-card {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin: 0;
+      border-radius: 22px;
+      overflow: hidden;
+      background: var(--panel);
+      cursor: pointer;
+      transition: transform .8s cubic-bezier(.22, .8, .2, 1), opacity .5s ease;
+      box-shadow: 0 30px 60px -24px rgba(40, 42, 28, .5);
+      will-change: transform;
+    }
 
-  <div class="cv-ctrl">
-    <button class="cv-btn cv-prev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
-    <button class="cv-btn cv-next" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-    <button class="cv-btn cv-expand" aria-label="View full screen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/></svg></button>
-  </div>
+    .cv-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      pointer-events: none;
+    }
 
-  <div class="cv-lb" role="dialog" aria-modal="true" aria-label="Gallery full screen">
-    <img alt="">
-    <button class="cv-btn cv-x" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
-    <button class="cv-btn cv-lp" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
-    <button class="cv-btn cv-ln" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-  </div>
-</section>
+    .cv-veil {
+      position: absolute;
+      inset: 0;
+      background: var(--bg);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .8s ease;
+    }
 
-<script>
-(function () {
-  var root  = document.getElementById('shCover');
-  var stage = root.querySelector('.cv-stage');
-  var cards = [].slice.call(stage.querySelectorAll('.cv-card'));
-  var head  = root.querySelector('.cv-head');
-  var lb    = root.querySelector('.cv-lb');
-  var lbImg = lb.querySelector('img');
-  var N = cards.length;
+    .cv-ctrl {
+      flex: 0 0 auto;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 14px;
+      height: 96px;
+    }
 
-  var AUTOPLAY_MS = 4500;
-  var SCALE = [1, .72, .52];
-  var POS   = [0, .84, 1.44];
-  var VEIL  = [0, .3, .5];
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    .cv-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--ink);
+      background: transparent;
+      color: var(--ink);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      padding: 0;
+      transition: background .25s, color .25s, transform .25s;
+    }
 
-  var cur = 0, W = 0, prev = cards.map(function () { return 0; });
-  var veils = cards.map(function (c) {
-    var v = document.createElement('div'); v.className = 'cv-veil'; c.appendChild(v); return v;
-  });
+    .cv-btn:hover {
+      background: var(--ink);
+      color: var(--bg);
+      transform: scale(1.06);
+    }
 
-  function offset(i) {
-    var d = ((i - cur) % N + N) % N; if (d > N / 2) d -= N; return d;
-  }
-  function render(instant) {
-    cards.forEach(function (c, i) {
-      var d = offset(i), a = Math.abs(d), s = d < 0 ? -1 : 1;
-      var wrap = !instant && Math.abs(d - prev[i]) > 2;
-      c.style.transition = (wrap || instant) ? 'none' : '';
-      c.style.transform = 'translateX(' + (s * POS[a] * W) + 'px) scale(' + SCALE[a] + ')';
-      c.style.zIndex = 10 - a;
-      veils[i].style.opacity = VEIL[a];
-      if (wrap) { c.style.opacity = 0; void c.offsetWidth; c.style.transition = ''; }
-      c.style.opacity = 1;
-      prev[i] = d;
-    });
-  }
-  function layout() {
-    var sw = stage.clientWidth, sh = stage.clientHeight;
-    W = Math.min(sw * (sw < 700 ? .62 : .34), sh * .88 / 1.2);
-    var H = W * 1.2;
-    cards.forEach(function (c) {
-      c.style.width = W + 'px'; c.style.height = H + 'px';
-      c.style.marginLeft = (-W / 2) + 'px'; c.style.marginTop = (-H / 2) + 'px';
-    });
-    render(true);
-  }
-  function go(n) { cur = ((n % N) + N) % N; render(); if (lb.classList.contains('is-open')) lbShow(); restart(); }
-  function next() { go(cur + 1); }
-  function prevSlide() { go(cur - 1); }
+    .cv-btn svg {
+      width: 18px;
+      height: 18px;
+    }
 
-  root.querySelector('.cv-next').addEventListener('click', next);
-  root.querySelector('.cv-prev').addEventListener('click', prevSlide);
-  var sx = 0, moved = false, down = false;
-  stage.addEventListener('pointerdown', function (e) { down = true; moved = false; sx = e.clientX; paused = true; });
-  stage.addEventListener('pointerup', function (e) {
-    if (!down) return; down = false; paused = false;
-    var dx = e.clientX - sx;
-    if (Math.abs(dx) > 50) { moved = true; dx < 0 ? next() : prevSlide(); }
-  });
-  stage.addEventListener('pointercancel', function () { down = false; paused = false; });
-  cards.forEach(function (c, i) {
-    c.addEventListener('click', function () {
-      if (moved) { moved = false; return; }
-      if (i === cur) openLb(); else go(i);
-    });
-  });
+    .cv-expand {
+      position: absolute;
+      right: clamp(16px, 4vw, 64px);
+      top: 50%;
+      transform: translateY(-50%);
+      width: 52px;
+      height: 52px;
+      border: 0;
+      background: var(--panel);
+    }
 
-  function lbShow() { lbImg.src = cards[cur].querySelector('img').src; }
-  function openLb() { lbShow(); lb.classList.add('is-open'); paused = true; }
-  function closeLb() { lb.classList.remove('is-open'); paused = false; }
-  root.querySelector('.cv-expand').addEventListener('click', openLb);
-  lb.querySelector('.cv-x').addEventListener('click', closeLb);
-  lb.querySelector('.cv-ln').addEventListener('click', next);
-  lb.querySelector('.cv-lp').addEventListener('click', prevSlide);
-  lb.addEventListener('click', function (e) { if (e.target === lb) closeLb(); });
-  document.addEventListener('keydown', function (e) {
-    var open = lb.classList.contains('is-open');
-    if (e.key === 'Escape' && open) closeLb();
-    if (e.key === 'ArrowRight' && (open || visible)) next();
-    if (e.key === 'ArrowLeft'  && (open || visible)) prevSlide();
-  });
+    .cv-expand:hover {
+      transform: translateY(-50%) scale(1.06);
+    }
 
-  var paused = false, visible = true, timer = null;
-  function restart() {
-    clearInterval(timer);
-    if (!AUTOPLAY_MS || reduce) return;
-    timer = setInterval(function () { if (!paused && visible && !document.hidden) next(); }, AUTOPLAY_MS);
-  }
-  stage.addEventListener('mouseenter', function () { paused = true; });
-  stage.addEventListener('mouseleave', function () { if (!down && !lb.classList.contains('is-open')) paused = false; });
-  new IntersectionObserver(function (en) { visible = en[0].isIntersecting; }, { threshold: .35 }).observe(root);
+    .cv-lb {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(22, 24, 17, .94);
+    }
 
-  function onScroll() {
-    var r = root.getBoundingClientRect(), vh = window.innerHeight;
-    if (r.bottom < 0 || r.top > vh) return;
-    var p = -r.top;
-    head.style.transform = 'translate3d(0,' + (p * .3) + 'px,0)';
-    head.style.opacity = Math.max(0, 1 - Math.abs(p) / (vh * .9));
-    stage.style.transform = 'translate3d(0,' + (-p * .08) + 'px,0)';
-  }
-  window.addEventListener('scroll', onScroll, { passive: true });
+    .cv-lb.is-open {
+      display: flex;
+    }
 
-  window.addEventListener('resize', layout);
-  layout(); restart(); onScroll();
-})();
-</script>
+    .cv-lb img {
+      max-width: 88vw;
+      max-height: 86vh;
+      border-radius: 14px;
+      box-shadow: 0 40px 80px -30px #000;
+    }
 
+    .cv-lb .cv-btn {
+      position: absolute;
+      border-color: #fff;
+      color: #fff;
+    }
 
-<!-- =====================================================================
-     7b) CONTACT FORM
-     ===================================================================== -->
-<div class="s9">
-<section class="shc-wrap" id="sh-contact">
-  <div class="shc-inner">
+    .cv-lb .cv-btn:hover {
+      background: #fff;
+      color: var(--ink);
+    }
 
-    <div>
-      <h2 class="shc-title">Talk to our <span>team</span></h2>
-      <p class="shc-lead">Feel free to reach out for help with your plot enquiry, site visit or any questions about Seven Hills Wai.</p>
+    .cv-lb .cv-x {
+      top: 24px;
+      right: 24px;
+    }
 
-      <ul class="shc-info">
-        <li>
-          <span class="shc-ico"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/></svg></span>
-          <a href="mailto:sevenhillswaipune@gmail.com">sevenhillswaipune@gmail.com</a>
-        </li>
-        <li>
-          <span class="shc-ico"><svg viewBox="0 0 24 24"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
-          <span>Seven Hills Wai, Satara, Maharashtra</span>
-        </li>
-        <li>
-          <span class="shc-ico"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg></span>
-          <a href="tel:+919032286663">+91 092032 28663</a>
-        </li>
-      </ul>
+    .cv-lb .cv-lp {
+      left: 24px;
+      top: 50%;
+      margin-top: -22px;
+    }
+
+    .cv-lb .cv-ln {
+      right: 24px;
+      top: 50%;
+      margin-top: -22px;
+    }
+
+    @media (max-width: 700px) {
+      .cv {
+        min-height: 640px;
+      }
+
+      .cv-expand {
+        width: 44px;
+        height: 44px;
+      }
+    }
+  </style>
+
+  <section class="cv" id="shCover" aria-label="Seven Hills Wai gallery">
+    <div class="cv-head">
+      <span class="cv-eyebrow">Gallery</span>
+      <h2 class="cv-title">Where seven hills <span>meet your home</span></h2>
+      <p class="cv-sub">40 acres of NA villa plots in Wai — a glimpse of the land, the views and the life.</p>
     </div>
 
-    <form class="shc-form" id="shc-form" novalidate>
-      <div class="shc-field">
-        <label for="shc-name">Full Name</label>
-        <input id="shc-name" name="name" type="text" placeholder="Enter Your Full Name" autocomplete="name" required>
-      </div>
-      <div class="shc-field">
-        <label for="shc-email">Email Address</label>
-        <input id="shc-email" name="email" type="email" placeholder="Enter Your Email Address" autocomplete="email" required>
-      </div>
-      <div class="shc-field">
-        <label for="shc-phone">Phone Number</label>
-        <input id="shc-phone" name="phone" type="tel" placeholder="Enter Your Phone Number" autocomplete="tel" inputmode="tel" required>
-      </div>
-      <div class="shc-field">
-        <label for="shc-msg">Message</label>
-        <textarea id="shc-msg" name="message" placeholder="Write Your Message Here"></textarea>
-      </div>
+    <div class="cv-stage">
+      <figure class="cv-card"><img src="./Assets/Gallary 2_live_images. png" alt="Seven Hills Wai 1" draggable="false">
+      </figure>
+      <figure class="cv-card"><img src="./Assets/Gallary3_live_images.png" alt="Seven Hills Wai 2" draggable="false">
+      </figure>
+      <figure class="cv-card"><img src="./Assets/Gallary4_live_images.png" alt="Seven Hills Wai 3" draggable="false">
+      </figure>
+      <figure class="cv-card"><img src="./Assets/Gallary 2_live_images. png" alt="Seven Hills Wai 4" draggable="false">
+      </figure>
+      <figure class="cv-card"><img src="./Assets/Gallary_live_images.png" alt="Seven Hills Wai 5" draggable="false">
+      </figure>
+    </div>
 
-      <button class="shc-btn" type="submit">
-        Send Message
-        <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </button>
-      <div class="shc-status" id="shc-status" role="status" aria-live="polite"></div>
-    </form>
+    <div class="cv-ctrl">
+      <button class="cv-btn cv-prev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 12H5M11 6l-6 6 6 6" />
+        </svg></button>
+      <button class="cv-btn cv-next" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M13 6l6 6-6 6" />
+        </svg></button>
+      <button class="cv-btn cv-expand" aria-label="View full screen"><svg viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7" />
+        </svg></button>
+    </div>
 
+    <div class="cv-lb" role="dialog" aria-modal="true" aria-label="Gallery full screen">
+      <img alt="">
+      <button class="cv-btn cv-x" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="1.8" stroke-linecap="round">
+          <path d="M6 6l12 12M18 6L6 18" />
+        </svg></button>
+      <button class="cv-btn cv-lp" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 12H5M11 6l-6 6 6 6" />
+        </svg></button>
+      <button class="cv-btn cv-ln" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M13 6l6 6-6 6" />
+        </svg></button>
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      var root = document.getElementById('shCover');
+      var stage = root.querySelector('.cv-stage');
+      var cards = [].slice.call(stage.querySelectorAll('.cv-card'));
+      var head = root.querySelector('.cv-head');
+      var lb = root.querySelector('.cv-lb');
+      var lbImg = lb.querySelector('img');
+      var N = cards.length;
+
+      var AUTOPLAY_MS = 4500;
+      var SCALE = [1, .72, .52];
+      var POS = [0, .84, 1.44];
+      var VEIL = [0, .3, .5];
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      var cur = 0, W = 0, prev = cards.map(function () { return 0; });
+      var veils = cards.map(function (c) {
+        var v = document.createElement('div'); v.className = 'cv-veil'; c.appendChild(v); return v;
+      });
+
+      function offset(i) {
+        var d = ((i - cur) % N + N) % N; if (d > N / 2) d -= N; return d;
+      }
+      function render(instant) {
+        cards.forEach(function (c, i) {
+          var d = offset(i), a = Math.abs(d), s = d < 0 ? -1 : 1;
+          var wrap = !instant && Math.abs(d - prev[i]) > 2;
+          c.style.transition = (wrap || instant) ? 'none' : '';
+          c.style.transform = 'translateX(' + (s * POS[a] * W) + 'px) scale(' + SCALE[a] + ')';
+          c.style.zIndex = 10 - a;
+          veils[i].style.opacity = VEIL[a];
+          if (wrap) { c.style.opacity = 0; void c.offsetWidth; c.style.transition = ''; }
+          c.style.opacity = 1;
+          prev[i] = d;
+        });
+      }
+      function layout() {
+        var sw = stage.clientWidth, sh = stage.clientHeight;
+        W = Math.min(sw * (sw < 700 ? .62 : .34), sh * .88 / 1.2);
+        var H = W * 1.2;
+        cards.forEach(function (c) {
+          c.style.width = W + 'px'; c.style.height = H + 'px';
+          c.style.marginLeft = (-W / 2) + 'px'; c.style.marginTop = (-H / 2) + 'px';
+        });
+        render(true);
+      }
+      function go(n) { cur = ((n % N) + N) % N; render(); if (lb.classList.contains('is-open')) lbShow(); restart(); }
+      function next() { go(cur + 1); }
+      function prevSlide() { go(cur - 1); }
+
+      root.querySelector('.cv-next').addEventListener('click', next);
+      root.querySelector('.cv-prev').addEventListener('click', prevSlide);
+      var sx = 0, moved = false, down = false;
+      stage.addEventListener('pointerdown', function (e) { down = true; moved = false; sx = e.clientX; paused = true; });
+      stage.addEventListener('pointerup', function (e) {
+        if (!down) return; down = false; paused = false;
+        var dx = e.clientX - sx;
+        if (Math.abs(dx) > 50) { moved = true; dx < 0 ? next() : prevSlide(); }
+      });
+      stage.addEventListener('pointercancel', function () { down = false; paused = false; });
+      cards.forEach(function (c, i) {
+        c.addEventListener('click', function () {
+          if (moved) { moved = false; return; }
+          if (i === cur) openLb(); else go(i);
+        });
+      });
+
+      function lbShow() { lbImg.src = cards[cur].querySelector('img').src; }
+      function openLb() { lbShow(); lb.classList.add('is-open'); paused = true; }
+      function closeLb() { lb.classList.remove('is-open'); paused = false; }
+      root.querySelector('.cv-expand').addEventListener('click', openLb);
+      lb.querySelector('.cv-x').addEventListener('click', closeLb);
+      lb.querySelector('.cv-ln').addEventListener('click', next);
+      lb.querySelector('.cv-lp').addEventListener('click', prevSlide);
+      lb.addEventListener('click', function (e) { if (e.target === lb) closeLb(); });
+      document.addEventListener('keydown', function (e) {
+        var open = lb.classList.contains('is-open');
+        if (e.key === 'Escape' && open) closeLb();
+        if (e.key === 'ArrowRight' && (open || visible)) next();
+        if (e.key === 'ArrowLeft' && (open || visible)) prevSlide();
+      });
+
+      var paused = false, visible = true, timer = null;
+      function restart() {
+        clearInterval(timer);
+        if (!AUTOPLAY_MS || reduce) return;
+        timer = setInterval(function () { if (!paused && visible && !document.hidden) next(); }, AUTOPLAY_MS);
+      }
+      stage.addEventListener('mouseenter', function () { paused = true; });
+      stage.addEventListener('mouseleave', function () { if (!down && !lb.classList.contains('is-open')) paused = false; });
+      new IntersectionObserver(function (en) { visible = en[0].isIntersecting; }, { threshold: .35 }).observe(root);
+
+      function onScroll() {
+        var r = root.getBoundingClientRect(), vh = window.innerHeight;
+        if (r.bottom < 0 || r.top > vh) return;
+        var p = -r.top;
+        head.style.transform = 'translate3d(0,' + (p * .3) + 'px,0)';
+        head.style.opacity = Math.max(0, 1 - Math.abs(p) / (vh * .9));
+        stage.style.transform = 'translate3d(0,' + (-p * .08) + 'px,0)';
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+
+      window.addEventListener('resize', layout);
+      layout(); restart(); onScroll();
+    })();
+  </script>
+
+
+  <!-- =====================================================================
+     7b) CONTACT FORM
+     ===================================================================== -->
+  <div class="s9">
+    <section class="shc-wrap" id="sh-contact">
+      <div class="shc-inner">
+
+        <!-- Left: intro + contact details -->
+        <div>
+          <h2 class="shc-title">Talk to our <span>team</span></h2>
+          <p class="shc-lead">Feel free to reach out for help with your plot enquiry, site visit or any questions about
+            Seven Hills Wai.</p>
+
+          <ul class="shc-info">
+            <li>
+              <span class="shc-ico">
+                <svg viewBox="0 0 24 24">
+                  <rect x="3" y="5" width="18" height="14" rx="2" />
+                  <path d="m3.5 7 8.5 6 8.5-6" />
+                </svg>
+              </span>
+              <a href="mailto:sevenhillswaipune@gmail.com">sevenhillswaipune@gmail.com</a>
+            </li>
+            <li>
+              <span class="shc-ico">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z" />
+                </svg>
+              </span>
+              <a href="tel:+919032286663">+91 092032 28663</a>
+            </li>
+            <li>
+              <span class="shc-ico">
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z" />
+                  <circle cx="12" cy="10" r="2.5" />
+                </svg>
+              </span>
+              <span><strong>Site Address:</strong><br>Seven Hills Wai, Satara, Maharashtra</span>
+            </li>
+            <li>
+              <span class="shc-ico">
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z" />
+                  <circle cx="12" cy="10" r="2.5" />
+                </svg>
+              </span>
+              <span><strong>Office Address:</strong><br>Office No. 906-907, Gera's Imperium Alpha, Vitthal Nagar,
+                Kharadi, Pune, Maharashtra 411014</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Right: form -->
+        <form class="shc-form" id="shc-form" novalidate>
+          <div class="shc-field">
+            <label for="shc-name">Full Name</label>
+            <input id="shc-name" name="name" type="text" placeholder="Enter Your Full Name" autocomplete="name"
+              required>
+          </div>
+          <div class="shc-field">
+            <label for="shc-email">Email Address</label>
+            <input id="shc-email" name="email" type="email" placeholder="Enter Your Email Address" autocomplete="email"
+              required>
+          </div>
+          <div class="shc-field">
+            <label for="shc-phone">Phone Number</label>
+            <input id="shc-phone" name="phone" type="tel" placeholder="Enter Your Phone Number" autocomplete="tel"
+              inputmode="tel" required>
+          </div>
+          <div class="shc-field">
+            <label for="shc-msg">Message</label>
+            <textarea id="shc-msg" name="message" placeholder="Write Your Message Here"></textarea>
+          </div>
+
+          <button class="shc-btn"  type="button" onclick="window.location.href='ThankYou.html'">
+            Send Message
+            <svg viewBox="0 0 24 24">
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </button>
+          <div class="shc-status" id="shc-status" role="status" aria-live="polite"></div>
+        </form>
+
+      </div>
+    </section>
   </div>
-</section>
-</div>
 
-
-
-
-<!-- =====================================================================
+  <!-- =====================================================================
      SCRIPTS
      ===================================================================== -->
 
-<!-- 2) Nature attractions carousel -->
+  <!-- 2) Nature attractions carousel -->
 
 
-<!-- 3) Location satellite map -->
+  <!-- 3) Location satellite map -->
 
 
-<!-- 4) Amenities (GSAP) -->
+  <!-- 4) Amenities (GSAP) -->
 
 
-<!-- 5) Legal & Security: hover/click highlight -->
+  <!-- 5) Legal & Security: hover/click highlight -->
 
-<!-- 7) BANKING TIE-UPS -->
-
-
-<!-- 7b) Contact form -->
+  <!-- 7) BANKING TIE-UPS -->
 
 
+  <!-- 7b) Contact form -->
 
-<script src="script.js"></script>
+
+
+  <script src="script.js"></script>
 </body>
+
 </html>

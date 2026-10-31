@@ -294,6 +294,17 @@ if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
       if (e[0].isIntersecting){ locSec.classList.add('in'); o.disconnect(); }
     }, {threshold:.2}).observe(locSec);
   } else { locSec.classList.add('in'); }
+
+  var heading = document.getElementById('lh');
+  if (heading) {
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function(entries, observer) {
+        if (entries[0].isIntersecting) { heading.classList.add('in'); observer.disconnect(); }
+      }, { threshold: 0.25 }).observe(heading);
+    } else {
+      heading.classList.add('in');
+    }
+  }
 })();
 } catch (err) { console.error("script block 5 failed:", err); }
 
@@ -504,3 +515,139 @@ try {
   });
 })();
 } catch (err) { console.error("script block 9 failed:", err); }
+
+/* ---- block 10: amenities modal ---- */
+try {
+(function(){
+  var ICON = {
+    horse:    '<path d="M6 21V10a6 6 0 0 1 12 0v11M6 17h3M15 17h3M6 13h3M15 13h3"/>',
+    dine:     '<path d="M7 3v8M5 3v5a2 2 0 0 0 4 0V3M7 11v10M17 21V3c-2 1-3 4-3 8h3"/>',
+    meditate: '<circle cx="12" cy="6" r="2"/><path d="M12 9v4M7 21c0-4 2-6 5-6s5 2 5 6M5 14c3 0 5-1 7-1s4 1 7 1"/>',
+    fruit:    '<path d="M12 7c-3-2-7 0-7 5s3 9 7 9 7-4 7-9-4-7-7-5zM12 7c0-2 1-4 3-4"/>',
+    turf:     '<rect x="2" y="5" width="20" height="14" rx="2"/><path d="M12 5v14"/><circle cx="12" cy="12" r="2.5"/>',
+    deck:     '<path d="M2 20l7-12 4 7 2-3 7 8z"/>',
+    forest:   '<path d="M12 22v-5M12 17c-4 0-6-2-6-5 0-2 1-3 2-4-1-3 1-6 4-6s5 3 4 6c1 1 2 2 2 4 0 3-2 5-6 5z"/>',
+    pool:     '<path d="M8 12V5a2 2 0 0 1 4 0M14 12V5a2 2 0 0 1 4 0M8 8h6M2 16c2 0 2-1.5 4-1.5s2 1.5 4 1.5 2-1.5 4-1.5 2 1.5 4 1.5 2-1.5 4-1.5M2 21c2 0 2-1.5 4-1.5s2 1.5 4 1.5 2-1.5 4-1.5 2 1.5 4 1.5 2-1.5 4-1.5"/>',
+    club:     '<path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6M9 10h.01M15 10h.01"/>',
+    party:    '<path d="M4 20l4-12 8 8zM14 4v2M19 9h2M17 5l1.5-1.5M10 4h.01"/>',
+    kids:     '<circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/>',
+    yoga:     '<path d="M12 3c3 3 5 6 5 9a5 5 0 0 1-10 0c0-3 2-6 5-9z"/><path d="M12 21v-6"/>',
+    picnic:   '<path d="M3 10h18l-2 10H5zM8 10l3-6M16 10l-3-6"/>',
+    cafe:     '<path d="M4 8h12v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5zM16 10h2a2 2 0 0 1 0 4h-2M7 3v2M10 3v2M13 3v2"/>',
+    gazebo:   '<path d="M3 10l9-6 9 6zM6 10v10M12 10v10M18 10v10M4 20h16"/>',
+    jog:      '<path d="M22 12h-4l-3 9L9 3l-3 9H2"/>',
+    fitness:  '<path d="M6 8v8M3 10v4M18 8v8M21 10v4M6 12h12"/>',
+    badminton:'<path d="M12 21l-3-7h6zM9 14L5 5M15 14l4-9M12 14V4"/>',
+    volley:   '<circle cx="12" cy="12" r="9"/><path d="M12 3c0 6 3 9 9 9M3 12c6 0 9-3 9-9M12 21c0-6-3-9-9-9"/>',
+    games:    '<rect x="2" y="7" width="20" height="11" rx="4"/><path d="M7 12.5h3M8.5 11v3M15 12h.01M17.5 13.5h.01"/>',
+    garden:   '<path d="M12 22v-7M7 15h10a4 4 0 0 0 1-7.8A5 5 0 0 0 7.2 6.6 4.5 4.5 0 0 0 7 15z"/>',
+    flower:   '<circle cx="12" cy="10" r="2.5"/><path d="M12 7.5V4M12 12.5V16M9.5 10H6M14.5 10H18M12 16v6"/>',
+    roads:    '<path d="M4 21l4-18M20 21L16 3M12 21v-4M12 12v-2M12 7V5"/>',
+    organic:  '<path d="M5 21c0-9 5-15 15-16 0 10-6 15-15 16zM5 21l8-8"/>',
+    butterfly:'<path d="M12 8v12M12 10C9 4 3 4 3 8s3 6 9 4M12 10c3-6 9-6 9-2s-3 6-9 4M12 14c-3 0-6 2-5 5s4 1 5-3M12 14c3 0 6 2 5 5s-4 1-5-3"/>',
+    rain:     '<path d="M7 16a4 4 0 0 1-.5-8A6 6 0 0 1 18 9a3.5 3.5 0 0 1 0 7M8 19l-1 2M12 19l-1 2M16 19l-1 2"/>',
+    sapling:  '<path d="M12 22V11M12 11c-3 0-5-2-5-5 3 0 5 2 5 5zM12 14c3 0 5-2 5-5-3 0-5 2-5 5zM7 22h10"/>',
+    gate:     '<path d="M3 21V9M21 21V9M3 9h18M7 9v12M12 9v12M17 9v12M2 21h20"/>',
+    cabin:    '<rect x="5" y="9" width="14" height="12" rx="1"/><path d="M3 9h18M9 14h6"/>',
+    cctv:     '<rect x="2" y="6" width="13" height="12" rx="2"/><path d="M15 10l7-4v12l-7-4"/>',
+    parking:  '<rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 17V7h4a3 3 0 0 1 0 6H9"/>',
+    lamp:     '<path d="M7 21h6M10 21V5a2 2 0 0 1 2-2h5M17 3v4M15 7h4l-1 3h-2z"/>',
+    ev:       '<path d="M9 2v5M15 2v5M6 7h12v4a6 6 0 0 1-12 0zM12 17v5"/>',
+    solar:    '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M5 19l1.5-1.5M17.5 6.5L19 5"/>',
+    water:    '<path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/>',
+    power:    '<path d="M13 2L6 12h5l-1 6 7-10h-5z"/><path d="M3 22h18"/>'
+  };
+
+  var GROUPS = [
+    ['Signature Experiences', [
+      ['horse','Horse Riding Arena'], ['dine','360° View Restaurant'], ['meditate','Meditation Centre'],
+      ['fruit','Fruit Plantation / Orchard'], ['turf','Multi-Sport Turf'], ['deck','Scenic View Deck'], ['forest','Nature / Forest Walk']
+    ]],
+    ['Lifestyle & Recreation', [
+      ['pool','Swimming Pool'], ['club','Clubhouse'], ['party','Party / Celebration Lawn'], ['kids',"Kids' Play Area"],
+      ['yoga','Yoga & Wellness Lawn'], ['picnic','Family Picnic Lawn'], ['cafe','Café / Refreshment Zone'], ['gazebo','Gazebo & Relaxation Deck']
+    ]],
+    ['Sports & Fitness', [
+      ['jog','Walking / Jogging Track'], ['fitness','Outdoor Fitness Zone'], ['badminton','Badminton Court'],
+      ['volley','Volleyball / Multipurpose Court'], ['games','Indoor Games Area']
+    ]],
+    ['Nature & Green Living', [
+      ['garden','Landscaped Central Garden'], ['flower','Flower Garden'], ['roads','Tree-Lined Internal Roads'],
+      ['organic','Organic / Kitchen Garden'], ['butterfly','Butterfly / Nature Zone'], ['rain','Rainwater Harvesting'], ['sapling','Dedicated Plantation Zones']
+    ]],
+    ['Security & Infrastructure', [
+      ['gate','Grand Gated Entrance'], ['cabin','Security Cabin'], ['cctv','CCTV Surveillance'], ['parking','Visitor Parking'],
+      ['lamp','Illuminated Internal Roads'], ['ev','EV Charging Points'], ['solar','Solar-Powered Common Areas'],
+      ['water','24x7 Water Supply'], ['power','Underground Electricity']
+    ]]
+  ];
+
+  var modal = document.getElementById('amenModal'),
+      dlg   = document.getElementById('amenDlg'),
+      body  = document.getElementById('amenBody'),
+      grid  = document.getElementById('amenGrid'),
+      closeBtn = document.getElementById('amenClose'),
+      trigger  = document.getElementById('moreCard'),
+      root = document.documentElement, lastFocus = null, isOpen = false;
+
+  function esc(s){ return s.replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
+
+  /* Build grouped grid once */
+  var frag = document.createDocumentFragment(), n = 0;
+  GROUPS.forEach(function(g){
+    var sec = document.createElement('section');
+    sec.className = 's4m__group';
+    var items = g[1].map(function(it){
+      var i = Math.min(n++, 16);
+      return '<li class="s4m__item" style="--i:' + i + '">' +
+        '<span class="s4m__ico"><svg viewBox="0 0 24 24" aria-hidden="true">' + ICON[it[0]] + '</svg></span>' +
+        '<span class="s4m__lbl">' + esc(it[1]) + '</span></li>';
+    }).join('');
+    sec.innerHTML = '<h3 class="s4m__gh"><span>' + esc(g[0]) + '</span><em>' + g[1].length + '</em></h3>' +
+      '<ul class="s4m__grid">' + items + '</ul>';
+    frag.appendChild(sec);
+  });
+  grid.appendChild(frag);
+
+  function open(){
+    if (isOpen) return;
+    isOpen = true; lastFocus = document.activeElement;
+    var sw = window.innerWidth - root.clientWidth;
+    root.classList.add('s4m-lock');
+    root.style.overflow = 'hidden';
+    if (sw > 0) document.body.style.paddingRight = sw + 'px';
+    body.scrollTop = 0;
+    modal.setAttribute('aria-hidden', 'false');
+    modal.classList.add('open');
+    setTimeout(function(){ closeBtn.focus({preventScroll:true}); }, 60);
+  }
+  function close(){
+    if (!isOpen) return;
+    isOpen = false;
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    setTimeout(function(){
+      root.style.overflow = ''; document.body.style.paddingRight = '';
+      root.classList.remove('s4m-lock');
+    }, 450);
+    if (lastFocus && lastFocus.focus) lastFocus.focus({preventScroll:true});
+  }
+
+  trigger.addEventListener('click', open);
+  trigger.addEventListener('keydown', function(e){
+    if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); open(); }
+  });
+  closeBtn.addEventListener('click', close);
+  modal.addEventListener('click', function(e){ if (e.target.hasAttribute('data-close')) close(); });
+
+  document.addEventListener('keydown', function(e){
+    if (!isOpen) return;
+    if (e.key === 'Escape'){ e.preventDefault(); close(); return; }
+    if (e.key === 'Tab'){            /* focus trap: close btn <-> scroll body */
+      var f = [closeBtn, body], i = f.indexOf(document.activeElement);
+      e.preventDefault();
+      f[(i + (e.shiftKey ? -1 : 1) + f.length) % f.length].focus();
+    }
+  });
+})();
+} catch (err) { console.error("script block 10 failed:", err); }
