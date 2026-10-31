@@ -84,12 +84,19 @@
   .shw-bar { position: relative; width: 144px; height: 2px; margin-top: 12px; background: var(--line); }
   .shw-bar i { position: absolute; top: 0; left: 0; width: 35%; height: 100%; background: var(--olive); }
   .shw-card { overflow: hidden; border: 1px solid var(--line); border-radius: 28px; background: #eceae2; line-height: 0; }
-  .shw-card picture, .shw-card img { display: block; width: 100%; max-width: 100%; height: auto; margin: 0; }
-  @media (max-width: 900px) {
+  .shw-card img { display: block; width: 100%; max-width: 100%; height: auto; margin: 0; }
+  .shw-img-desktop { display: block !important; }
+  .shw-img-mobile { display: none !important; }
+  @media (max-width: 768px) {
     .shw { padding: 28px 16px 32px; }
-    .shw-head { flex-direction: column; gap: 20px; }
+    .shw-head { flex-direction: column; align-items: flex-start; gap: 20px; margin-bottom: 20px; }
+    .shw h2 { font-size: clamp(56px, 18vw, 80px); }
     .shw-meta { width: 100%; }
+    .shw-meta p { margin-bottom: 22px; font-size: 15px; }
+    .shw-count { gap: 24px; }
     .shw-card { border-radius: 20px; }
+    .shw-img-desktop { display: none !important; }
+    .shw-img-mobile { display: block !important; }
   }
 </style>
 </head>
@@ -552,9 +559,8 @@
     </div>
 
     <div class="shw-card">
-      <picture>
-        <img src="./Assets/Site_map.png" width="2021" height="778" alt="Seven Hills Wai site map" loading="lazy">
-      </picture>
+      <img class="shw-img-desktop" src="./Assets/Site_map.png" width="2021" height="778" alt="Seven Hills Wai site map" loading="lazy">
+      <img class="shw-img-mobile" src="./Assets/site_map_mobile_view.png" width="2021" height="778" alt="Seven Hills Wai site map" loading="lazy">
     </div>
   </div>
 </section>
