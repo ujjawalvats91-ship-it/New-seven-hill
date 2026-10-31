@@ -469,10 +469,7 @@ try {
 /* ---- block 9 ---- */
 try {
 (function(){
-  
-  var ENDPOINT = '';                         // e.g. '/wp-json/yoursite/v1/lead'
-  var THANK_YOU_URL = '';                    // e.g. '/thank-you/' (leave empty to stay on page)
-
+  var ENDPOINT = '';
   var form = document.getElementById('shc-form');
   var status = document.getElementById('shc-status');
   if (!form) return;
@@ -482,36 +479,69 @@ try {
     status.className = 'shc-status';
     status.textContent = '';
 
+    var nameInput = form.elements.name;
+    var emailInput = form.elements.email;
+    var phoneInput = form.elements.phone;
     var data = {
-      name: form.name.value.trim(),
-      email: form.email.value.trim(),
-      phone: form.phone.value.trim(),
-      message: form.message.value.trim(),
+      name: nameInput.value.trim(),
+      email: emailInput.value.trim(),
+      phone: phoneInput.value.trim(),
+      message: form.elements.message.value.trim(),
       source: 'Seven Hills Wai - Contact'
     };
 
-    if (!data.name || !/^\S+@\S+\.\S+$/.test(data.email) || data.phone.replace(/\D/g,'').length < 10){
+    var invalidField = null;
+    var errorMessage = '';
+    if (!data.name) {
+      invalidField = nameInput;
+      errorMessage = 'Please enter your full name.';
+    } else if (!emailInput.validity.valid || !data.email) {
+      invalidField = emailInput;
+      errorMessage = 'Please enter a valid email address.';
+    } else if (!/^[0-9]{10}$/.test(data.phone)) {
+      invalidField = phoneInput;
+      errorMessage = 'Please enter a 10-digit phone number.';
+    }
+
+    if (invalidField) {
       status.className = 'shc-status is-error';
-      status.textContent = 'Please enter your name, a valid email and a 10-digit phone number.';
+      status.textContent = errorMessage;
+      invalidField.focus();
       return;
     }
 
     var btn = form.querySelector('.shc-btn');
+    if (!ENDPOINT) {
+      status.className = 'shc-status is-error';
+      status.textContent = 'The enquiry form is not connected yet. Please contact us by email or phone.';
+      console.error('Contact form: no ENDPOINT is configured; this enquiry was not sent.');
+      return;
+    }
+
+    var thankYouWindow = window.open('about:blank', '_blank');
+    if (!thankYouWindow) {
+      status.className = 'shc-status is-error';
+      status.textContent = 'Please allow pop-ups to open the confirmation page, then try again.';
+      return;
+    }
+
     btn.disabled = true;
-
-    var send = ENDPOINT
-      ? fetch(ENDPOINT, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data)})
-          .then(function(r){ if(!r.ok) throw new Error('bad response'); })
-      : Promise.resolve(console.warn('Contact form: set ENDPOINT to save leads.'));
-
-    send.then(function(){
-      if (THANK_YOU_URL){ window.location.href = THANK_YOU_URL; return; }
-      status.textContent = 'Thank you. Our team will contact you shortly.';
+    fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    }).then(function(response) {
+      if (!response.ok) throw new Error('Contact form submission failed.');
+      thankYouWindow.location.href = './ThankYou.html';
+      status.textContent = 'Your enquiry was submitted. The confirmation page opened in a new tab.';
       form.reset();
     }).catch(function(){
+      thankYouWindow.close();
       status.className = 'shc-status is-error';
       status.textContent = 'Something went wrong. Please try again.';
-    }).then(function(){ btn.disabled = false; });
+    }).then(function() {
+      btn.disabled = false;
+    });
   });
 })();
 } catch (err) { console.error("script block 9 failed:", err); }

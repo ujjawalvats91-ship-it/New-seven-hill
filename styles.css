@@ -2733,6 +2733,18 @@ body {
 /* =====================================================================
    7b) CONTACT FORM
    ===================================================================== */
+#contact-section {
+  --bg: #f9f8f3;
+  --ink: #1a1a18;
+  --olive: #6b7a35;
+  --muted: #6b6b63;
+  --line: #dcdacd;
+  --wa: #25d366;
+  --wa-dark: #1ebe5b;
+}
+#contact-section [hidden] {
+  display: none !important;
+}
 .s9, .s9 * {
     font-family: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif !important;
   }
@@ -2941,6 +2953,232 @@ body {
     .shc-field input,
     .shc-field textarea {
       font-size: 16px;
+    }
+  }
+
+  /* ---------- Thank-you view ---------- */
+  .sh-ty {
+    position: relative;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: calc(32px + env(safe-area-inset-top, 0px)) 24px calc(140px + env(safe-area-inset-bottom, 0px));
+    overflow: hidden;
+    background: var(--bg);
+    color: var(--ink);
+  }
+  .sh-ty, .sh-ty * {
+    box-sizing: border-box;
+  }
+  .sh-ty__hills {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: clamp(110px, 22vh, 200px);
+    pointer-events: none;
+  }
+  .sh-ty__card {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 520px;
+    text-align: center;
+  }
+  .sh-tick {
+    position: relative;
+    width: 132px;
+    height: 132px;
+    margin: 0 auto 36px;
+  }
+  .sh-tick__ripple {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 2px solid var(--olive);
+    opacity: 0;
+    animation: sh-ripple 1.6s ease-out 1.25s 2;
+  }
+  .sh-tick__ripple.r2 {
+    animation-delay: 1.55s;
+  }
+  .sh-tick svg {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+  .sh-tick__disc {
+    fill: rgba(107, 122, 53, 0.10);
+    transform-origin: 50% 50%;
+    transform: scale(.6);
+    opacity: 0;
+    animation: sh-pop .5s cubic-bezier(.2,.9,.3,1.3) .75s forwards;
+  }
+  .sh-tick__ring {
+    fill: none;
+    stroke: var(--olive);
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-dasharray: 314;
+    stroke-dashoffset: 314;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+    animation: sh-draw .8s cubic-bezier(.65,0,.35,1) .15s forwards;
+  }
+  .sh-tick__check {
+    fill: none;
+    stroke: var(--olive);
+    stroke-width: 6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 60;
+    stroke-dashoffset: 60;
+    animation: sh-draw .45s cubic-bezier(.65,0,.35,1) .85s forwards;
+  }
+  @keyframes sh-draw {
+    to { stroke-dashoffset: 0; }
+  }
+  @keyframes sh-pop {
+    to { transform: scale(1); opacity: 1; }
+  }
+  @keyframes sh-ripple {
+    0% { transform: scale(1); opacity: .55; }
+    100% { transform: scale(1.7); opacity: 0; }
+  }
+  .sh-badge {
+    display: inline-block;
+    margin-bottom: 22px;
+    padding: 7px 16px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: #fff;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+    opacity: 0;
+    animation: sh-rise .6s ease 1s forwards;
+  }
+  .sh-ty__title {
+    margin: 0;
+    font-weight: 300;
+    font-size: clamp(54px, 13vw, 92px);
+    line-height: .95;
+    letter-spacing: -.045em;
+    color: var(--ink);
+    opacity: 0;
+    transform: translateY(8px);
+    animation: sh-rise .6s ease 1.1s forwards;
+  }
+  .sh-ty__accent {
+    color: var(--olive);
+  }
+  .sh-ty__text {
+    margin: 16px auto 0;
+    max-width: 42ch;
+    font-size: clamp(16px, 2.4vw, 18px);
+    line-height: 1.6;
+    color: var(--muted);
+    opacity: 0;
+    transform: translateY(8px);
+    animation: sh-rise .6s ease 1.25s forwards;
+  }
+  .sh-ty__actions {
+    margin-top: 34px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    opacity: 0;
+    transform: translateY(8px);
+    animation: sh-rise .6s ease 1.4s forwards;
+  }
+  @keyframes sh-rise {
+    to { opacity: 1; transform: none; }
+  }
+  .sh-wa {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    min-height: 54px;
+    padding: 0 30px;
+    border-radius: 999px;
+    background: var(--wa);
+    color: #fff;
+    font: 700 17px/1 "DM Sans", system-ui, sans-serif;
+    text-decoration: none;
+    box-shadow: 0 10px 28px rgba(37, 211, 102, .28);
+    transition: background .2s ease, transform .2s ease, box-shadow .2s ease;
+  }
+  .sh-wa svg {
+    width: 24px;
+    height: 24px;
+    flex: none;
+  }
+  .sh-wa:hover {
+    background: var(--wa-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 32px rgba(37, 211, 102, .36);
+  }
+  .sh-wa:active {
+    transform: translateY(0);
+  }
+  .sh-home {
+    padding: 6px 4px;
+    border: 0;
+    background: none;
+    color: var(--muted);
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-color: var(--line);
+    cursor: pointer;
+  }
+  .sh-home:hover {
+    color: var(--ink);
+    text-decoration-color: var(--olive);
+  }
+  .sh-wa:focus-visible,
+  .sh-home:focus-visible {
+    outline: 3px solid var(--olive);
+    outline-offset: 3px;
+  }
+  @media (max-width: 480px) {
+    .sh-wa {
+      width: 100%;
+    }
+    .sh-tick {
+      width: 112px;
+      height: 112px;
+      margin-bottom: 30px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .sh-tick__ring,
+    .sh-tick__check {
+      animation: none;
+      stroke-dashoffset: 0;
+    }
+    .sh-tick__disc {
+      animation: none;
+      transform: none;
+      opacity: 1;
+    }
+    .sh-tick__ripple {
+      display: none;
+    }
+    .sh-badge,
+    .sh-ty__title,
+    .sh-ty__text,
+    .sh-ty__actions {
+      animation: none;
+      opacity: 1;
+      transform: none;
     }
   }
 

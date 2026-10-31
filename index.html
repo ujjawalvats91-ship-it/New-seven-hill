@@ -1513,7 +1513,7 @@
   <!-- =====================================================================
      7b) CONTACT FORM
      ===================================================================== -->
-  <div class="s9">
+  <div class="s9" id="contact-section">
     <section class="shc-wrap" id="sh-contact">
       <div class="shc-inner">
 
@@ -1540,7 +1540,7 @@
                     d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z" />
                 </svg>
               </span>
-              <a href="tel:+919032286663">+91 092032 28663</a>
+              <a href="tel:+919203228663">+91 092032 28663</a>
             </li>
             <li>
               <span class="shc-ico">
@@ -1566,37 +1566,41 @@
 
         <!-- Right: form -->
         <form class="shc-form" id="shc-form" novalidate>
+
           <div class="shc-field">
             <label for="shc-name">Full Name</label>
-            <input id="shc-name" name="name" type="text" placeholder="Enter Your Full Name" autocomplete="name"
-              required>
+            <input id="shc-name" name="name" type="text" placeholder="Enter Your Full Name" autocomplete="name" required>
           </div>
+
           <div class="shc-field">
             <label for="shc-email">Email Address</label>
-            <input id="shc-email" name="email" type="email" placeholder="Enter Your Email Address" autocomplete="email"
-              required>
+            <input id="shc-email" name="email" type="email" placeholder="Enter Your Email Address" autocomplete="email" required>
           </div>
+
           <div class="shc-field">
             <label for="shc-phone">Phone Number</label>
             <input id="shc-phone" name="phone" type="tel" placeholder="Enter Your Phone Number" autocomplete="tel"
               inputmode="tel" required>
           </div>
+
           <div class="shc-field">
             <label for="shc-msg">Message</label>
             <textarea id="shc-msg" name="message" placeholder="Write Your Message Here"></textarea>
           </div>
 
-          <button class="shc-btn"  type="button" onclick="window.location.href='ThankYou.html'">
+          <button class="shc-btn" type="submit">
             Send Message
             <svg viewBox="0 0 24 24">
               <path d="M5 12h14M13 6l6 6-6 6" />
             </svg>
           </button>
-          <div class="shc-status" id="shc-status" role="status" aria-live="polite"></div>
-        </form>
 
+          <div class="shc-status" id="shc-status" role="status" aria-live="polite"></div>
+
+        </form>
       </div>
     </section>
+
   </div>
 
   <!-- =====================================================================
